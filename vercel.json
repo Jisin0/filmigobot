@@ -7,7 +7,7 @@
 
     "routes": [
         {
-          "src": "/api/bot/*",
+          "src": "/bot/*",
           "dest": "/api/bot.go"
         }
       ]
