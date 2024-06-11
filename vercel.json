@@ -3,13 +3,6 @@
       "env": {
         "GO_BUILD_FLAGS": "-ldflags '-s -w'"
       }
-    },
-
-    "routes": [
-      {
-        "src": "/api/bot/*",
-        "dest": "/api/bot.go"
-      }
-    ]
+    }
 }
   
