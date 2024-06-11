@@ -172,8 +172,6 @@ func GetJWTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboardB
 			} else {
 				fmt.Println("failed to upload to telegraph " + err.Error())
 			}
-
-			defer file.Close()
 		}
 	}
 

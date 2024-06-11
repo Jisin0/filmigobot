@@ -4,6 +4,7 @@
 package plugins
 
 import (
+	"bytes"
 	"fmt"
 	"image"
 	"image/draw"
@@ -23,12 +24,8 @@ const (
 )
 
 // Creates a poster image with a backdrop and poster as overlay.
-func CreateJWPoster(backdropURL, posterURL, id string) *os.File {
+func CreateJWPoster(backdropURL, posterURL, id string) *bytes.Buffer {
 	fileName := fmt.Sprintf("%s.jpg", id)
-
-	if file, err := os.Open(fileName); err == nil {
-		return file
-	}
 
 	// Load the backdrop image
 	backdrop, err := loadImage(backdropURL)
@@ -79,19 +76,14 @@ func CreateJWPoster(backdropURL, posterURL, id string) *os.File {
 	}
 	defer outFile.Close()
 
-	err = jpeg.Encode(outFile, result, &jpeg.Options{Quality: 100})
+	var buf bytes.Buffer
+	err = jpeg.Encode(&buf, result, &jpeg.Options{Quality: 100})
 	if err != nil {
 		fmt.Println("Error saving result:", err)
 		return nil
 	}
 
-	returnFile, err := os.Open(fileName)
-	if err != nil {
-		fmt.Println("Error reading file:", err)
-		return nil
-	}
-
-	return returnFile
+	return &buf
 }
 
 // loadImage loads an image from a URL

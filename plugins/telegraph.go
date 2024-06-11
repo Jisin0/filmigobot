@@ -12,7 +12,7 @@ import (
 // Copy Pasted from github.com/StarkBotsIndustries/telegraph
 // Upload photo/video to Telegra.ph on the '/upload' endpoint.
 // Media type should either be "video" or "photo". "Animation" is considered "video" here.
-func UploadTelegraph(f io.Reader, mediaType string) (string, error) {
+func UploadTelegraph(data *bytes.Buffer, mediaType string) (string, error) {
 	var (
 		name string
 		b    = &bytes.Buffer{}
@@ -30,7 +30,7 @@ func UploadTelegraph(f io.Reader, mediaType string) (string, error) {
 		return "", err
 	}
 
-	io.Copy(part, f)
+	part.Write(data.Bytes())
 	w.Close()
 
 	r, err := http.NewRequest("POST", "https://te.legra.ph/upload", bytes.NewReader(b.Bytes()))
