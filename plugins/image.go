@@ -11,7 +11,6 @@ import (
 	"image/jpeg"
 	"image/png"
 	"net/http"
-	"os"
 	"strings"
 
 	"github.com/fogleman/gg"
@@ -25,8 +24,6 @@ const (
 
 // Creates a poster image with a backdrop and poster as overlay.
 func CreateJWPoster(backdropURL, posterURL, id string) *bytes.Buffer {
-	fileName := fmt.Sprintf("%s.jpg", id)
-
 	// Load the backdrop image
 	backdrop, err := loadImage(backdropURL)
 	if err != nil {
@@ -67,14 +64,6 @@ func CreateJWPoster(backdropURL, posterURL, id string) *bytes.Buffer {
 
 	// Draw the poster onto the new image with the calculated rectangle
 	draw.Draw(result, posterRect, poster, image.Point{}, draw.Over)
-
-	// Save the result to a new file
-	outFile, err := os.Create(fileName)
-	if err != nil {
-		fmt.Println("Error creating output file:", err)
-		return nil
-	}
-	defer outFile.Close()
 
 	var buf bytes.Buffer
 	err = jpeg.Encode(&buf, result, &jpeg.Options{Quality: 100})
