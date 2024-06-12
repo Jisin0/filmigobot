@@ -12,7 +12,7 @@
         },
         {
           "src": "/",
-          "dest": "/api/index.go"
+          "dest": "/api/homepage.go"
         }
       ]
 }
