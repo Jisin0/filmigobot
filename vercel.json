@@ -9,6 +9,10 @@
         {
           "src": "/bot/.*",
           "dest": "/api/bot.go"
+        },
+        {
+          "src": "/",
+          "dest": "/api/index.html"
         }
       ]
 }
