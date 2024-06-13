@@ -7,17 +7,24 @@
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-yellow-100 font-sans">
-  <div class="container mx-auto px-4 py-8 flex flex-col justify-center items-center min-h-screen">
-    <div class="bg-yellow-150 rounded-lg shadow-md px-8 py-10 border border-yellow-700">  <h1 class="text-3xl font-bold text-yellow-700 mb-8">Connect a New Bot</h1>  <div class="flex flex-col space-y-4">
-      <label for="botToken" class="text-lg text-yellow-700">Enter your Bot Token:</label>
-      <input type="text" id="botToken" class="rounded-full px-4 py-2 bg-yellow-200 text-yellow-900 focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-gray-400">
-      <button type="button" id="connectButton" class="rounded-full px-8 py-2 bg-yellow-700 text-white hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400">Connect</button>
-    </div>
+  <div class="container mx-auto px-4 py-8 flex justify-center items-center min-h-screen">
+    <div class="bg-yellow-100 rounded-lg shadow-md px-8 py-10 border border-yellow-700">
+      <h1 class="text-3xl font-bold text-yellow-700 mb-4">Connect a New Bot</h1>
+      <div class="flex flex-col space-y-4">
+        <label for="botToken" class="text-lg text-yellow-700">Enter your Bot Token:</label>
+        <div class="relative">  <input type="text" id="botToken" class="rounded-full px-4 py-2 bg-yellow-200 text-yellow-900 focus:outline-none focus:ring-2 focus:ring-yellow-400 placeholder:text-gray-400 w-full">
+          <div class="flex items-center absolute top-0 right-0 mt-1 invisible">  <span id="errorMessage" class="text-red-500 text-sm mr-2"></span>
+          </div>
+        </div>
+        <button type="button" id="connectButton" class="rounded-full px-8 py-2 bg-yellow-700 text-white hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400">Connect</button>
+      </div>
     </div>
   </div>
+  </div>
   <script>
-    const connectButton = document.getElementById('connectButton');
+const connectButton = document.getElementById('connectButton');
 const botTokenInput = document.getElementById('botToken');
+const errorMessage = document.getElementById('errorMessage');
 
 connectButton.addEventListener('click', async () => {
   const botToken = botTokenInput.value;
@@ -36,11 +43,15 @@ connectButton.addEventListener('click', async () => {
     if (data.ok) {
       alert('Webhook set successfully!');
     } else {
-      alert('Error: ' + data.description);
+      errorMessage.textContent = data.description;
+      errorMessage.classList.remove('invisible');
+      botTokenInput.classList.add('border-red-500'); // Add red border on error
     }
   } catch (error) {
     console.error(error);
-    alert('An error occurred!');
+    errorMessage.textContent = 'An error occurred!';
+    errorMessage.classList.remove('invisible');
+    botTokenInput.classList.add('border-red-500'); // Add red border on error
   }
 });
   </script>
