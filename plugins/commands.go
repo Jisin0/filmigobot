@@ -32,7 +32,10 @@ This bot is only for limited non-commercial use of <a href='https://help.imdb.co
 func Start(bot *gotgbot.Bot, ctx *ext.Context) error {
 	update := ctx.EffectiveMessage
 
-	bot.SendMessage(update.Chat.Id, fmt.Sprintf(startText, mention(update.From)), &gotgbot.SendMessageOpts{ParseMode: gotgbot.ParseModeHTML, LinkPreviewOptions: &gotgbot.LinkPreviewOptions{IsDisabled: true}, ReplyMarkup: gotgbot.InlineKeyboardMarkup{InlineKeyboard: startButtons}})
+	_, err := bot.SendMessage(update.Chat.Id, fmt.Sprintf(startText, mention(update.From)), &gotgbot.SendMessageOpts{ParseMode: gotgbot.ParseModeHTML, LinkPreviewOptions: &gotgbot.LinkPreviewOptions{IsDisabled: true}, ReplyMarkup: gotgbot.InlineKeyboardMarkup{InlineKeyboard: startButtons}})
+	if err != nil {
+		fmt.Println(err)
+	}
 
 	return nil
 }

@@ -60,7 +60,10 @@ func InlineQueryHandler(bot *gotgbot.Bot, ctx *ext.Context) error {
 
 	fullQuery := update.Query
 	if len(fullQuery) < 1 {
-		update.Answer(bot, []gotgbot.InlineQueryResult{}, &gotgbot.AnswerInlineQueryOpts{CacheTime: defaultCacheTime, Button: startSearchingButton})
+		_, err := update.Answer(bot, []gotgbot.InlineQueryResult{}, &gotgbot.AnswerInlineQueryOpts{CacheTime: defaultCacheTime, Button: startSearchingButton})
+		if err != nil {
+			fmt.Println(err)
+		}
 	}
 
 	var (
@@ -76,10 +79,13 @@ func InlineQueryHandler(bot *gotgbot.Bot, ctx *ext.Context) error {
 
 	results := getInlineResults(method, query, fullQuery)
 	if len(results) < 1 {
-		update.Answer(bot, []gotgbot.InlineQueryResult{noResultsArticle}, &gotgbot.AnswerInlineQueryOpts{
+		_, err := update.Answer(bot, []gotgbot.InlineQueryResult{noResultsArticle}, &gotgbot.AnswerInlineQueryOpts{
 			CacheTime: defaultCacheTime,
 			Button:    searchResultsButton,
 		})
+		if err != nil {
+			fmt.Println(err)
+		}
 	}
 
 	_, err := update.Answer(bot, results, &gotgbot.AnswerInlineQueryOpts{
