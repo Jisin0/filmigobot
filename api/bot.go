@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
 	"path"
 	"slices"
 	"strings"
@@ -12,6 +13,11 @@ import (
 	"github.com/Jisin0/filmigobot/plugins"
 	"github.com/PaulSonOfLars/gotgbot/v2"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext"
+)
+
+var (
+	allowedTokens    = strings.Split(os.Getenv("BOT_TOKENS"), " ")
+	lenAllowedTokens = len(allowedTokens)
 )
 
 // Handles all incoming traffic from webhooks.

@@ -45,17 +45,13 @@
     connectButton.addEventListener('click', async () => {
       const botToken = botTokenInput.value.trim();
       if (!botToken) {
-        errorMessage.textContent = 'Bot token is required!';
-        errorMessage.classList.remove('invisible');
-        botTokenInput.classList.add('border-red-500');
+       showError('Bot token is required!');
         return;
       }
 
       // Regex check the bot token first
       if (!/^\d{5,}:\w{10,}/.test(botToken)){
-        errorMessage.textContent = 'Bot token is invalid!';
-        errorMessage.classList.remove('invisible');
-        botTokenInput.classList.add('border-red-500');
+       showError('Bot token is invalid!');
         return;
       }
 
@@ -64,7 +60,12 @@
       errorMessage.textContent = '';
       botTokenInput.classList.remove('border-red-500');
 
-      const currentUrl = window.location.origin;
+      let currentUrl = window.location.origin;
+      // Use default url if null
+      if (currentUrl=='null') {
+        currentUrl = 'https://filmigobot.vercel.app';
+      }
+
       const webhookUrl = `${currentUrl}/bot/${botToken}`;
 
       try {
@@ -76,28 +77,32 @@
 
         const data = await response.json();
 
-        if (!data.ok) {
+        if (data.ok) {
           // Replace content with success message
           mainContent.innerHTML = `
             <div class="text-center">
               <h1 class="text-4xl font-bold text-yellow-700 mb-4">Success 🎉</h1>
-              <p class="text-xl text-yellow-700">Webhook set successfully!</p>
+              <p class="text-xl text-yellow-700">Bot Connected Successfully!</p>
             </div>
           `;
           // Start confetti animation
           startConfetti();
         } else {
-          errorMessage.textContent = data.description;
-          errorMessage.classList.remove('invisible');
-          botTokenInput.classList.add('border-red-500'); // Add red border on error
+          showError(data.description);
+          return;
         }
       } catch (error) {
         console.error(error);
-        errorMessage.textContent = 'An error occurred!';
-        errorMessage.classList.remove('invisible');
-        botTokenInput.classList.add('border-red-500'); // Add red border on error
+       showError('An error occurred!');
+       return;
       }
     });
+
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.classList.remove('invisible');
+      botTokenInput.classList.add('border-red-500');
+    }
 
     function startConfetti() {
       let W = window.innerWidth;

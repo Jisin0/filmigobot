@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-// Copy Pasted from github.com/StarkBotsIndustries/telegraph
+// https://github.com/StarkBotsIndustries/telegraph
 // Upload photo/video to Telegra.ph on the '/upload' endpoint.
 // Media type should either be "video" or "photo". "Animation" is considered "video" here.
 func UploadTelegraph(data *bytes.Buffer, mediaType string) (string, error) {
