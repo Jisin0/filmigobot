@@ -38,10 +38,16 @@ func Bot(w http.ResponseWriter, r *http.Request) {
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
 		fmt.Fprintf(w, "Error reading request body: %v", err)
+		w.WriteHeader(200)
 		return
 	}
 
-	json.Unmarshal(body, &update)
+	err = json.Unmarshal(body, &update)
+	if err != nil {
+		fmt.Println("failed to unmarshal body ", err)
+		w.WriteHeader(200)
+		return
+	}
 
 	ctx := ext.NewContext(&update, map[string]interface{}{})
 
@@ -53,14 +59,14 @@ func Bot(w http.ResponseWriter, r *http.Request) {
 
 				switch cmd {
 				case "start":
-					plugins.Start(bot, ctx)
+					plugins.Start(bot, ctx) // nolint:errcheck
 				}
 			}
 		}
 	} else if ctx.InlineQuery != nil {
-		plugins.InlineQueryHandler(bot, ctx)
+		plugins.InlineQueryHandler(bot, ctx) // nolint:errcheck
 	} else if ctx.ChosenInlineResult != nil {
-		plugins.InlineResultHandler(bot, ctx)
+		plugins.InlineResultHandler(bot, ctx) // nolint:errcheck
 	}
 
 	w.WriteHeader(200)

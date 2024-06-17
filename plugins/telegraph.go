@@ -30,7 +30,11 @@ func UploadTelegraph(data *bytes.Buffer, mediaType string) (string, error) {
 		return "", err
 	}
 
-	part.Write(data.Bytes())
+	_, err = part.Write(data.Bytes())
+	if err != nil {
+		return "", err
+	}
+
 	w.Close()
 
 	r, err := http.NewRequest("POST", "https://te.legra.ph/upload", bytes.NewReader(b.Bytes()))
@@ -56,10 +60,18 @@ func UploadTelegraph(data *bytes.Buffer, mediaType string) (string, error) {
 
 	var jsonData uploadResult
 
-	json.Unmarshal(content, &jsonData.Source)
+	err = json.Unmarshal(content, &jsonData.Source)
+	if err != nil {
+		return "", err
+	}
+
 	if jsonData.Source == nil {
 		var err errorUpload
-		json.Unmarshal(content, &err)
+
+		er := json.Unmarshal(content, &err)
+		if er != nil {
+			fmt.Println(er)
+		}
 		return "", fmt.Errorf(err.Error)
 	}
 
