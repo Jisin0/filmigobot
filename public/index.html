@@ -83,6 +83,7 @@
             <div class="text-center">
               <h1 class="text-4xl font-bold text-yellow-700 mb-4">Success 🎉</h1>
               <p class="text-xl text-yellow-700">Bot Connected Successfully!</p>
+              <p class="text-base text-yellow-600">Make Sure you Have Set Inline Feedback to 100% from @botfather for The bot to Operate Smoothly</p>
             </div>
           `;
           // Start confetti animation
@@ -109,7 +110,7 @@
       let H = window.innerHeight;
       const canvas = document.getElementById("canvas");
       const context = canvas.getContext("2d");
-      const maxConfettis = 150;
+      const maxConfettis = 75;
       const particles = [];
 
       const possibleColors = [
@@ -174,7 +175,7 @@
           particle = particles[i];
 
           particle.tiltAngle += particle.tiltAngleIncremental;
-          particle.y += (Math.cos(particle.d) + 3 + particle.r / 2) / 2;
+          particle.y += (Math.cos(particle.d) + 3 + particle.r / 2) / 4;
           particle.tilt = Math.sin(particle.tiltAngle - i / 3) * 15;
 
           if (particle.y <= H) remainingFlakes++;

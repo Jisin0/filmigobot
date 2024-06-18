@@ -2,11 +2,15 @@
 
 **filmigobot** is a fully serverless high-performace inline telegram bot to search different movie databases using the [filmigo library](https://github.com/Jisin0/filmigo) written in [GO](https://go.dev). It is designed to be easily deplyed to Vercel but has support almost any other servers. It currently supports IMDb, JustWatch and OMDb.
 
+Connect a new bot to the [Public App](https://filmigobot.vercel.app) now or deploy a new instance following the instructions below. 
+
 ## Variables
 
 - [ ] `BOT_TOKEN`  : Optional. On vercel, a list of bot tokens allowed to connect to the app or leave empty allow anyone to connect. On servers, a single bot token.
 
 ## Deploy
+
+
 <details><summary>Deploy To Heroku</summary>
 <p>
 <br>
@@ -75,7 +79,7 @@ You must set the Run command to :
 
 <details><summary>Run Locally/VPS</summary>
 <p>
-You must have the latest version of <a href="https://go.dev/dl">go</a> installed first
+You must have the latest version of <a href="https://go.dev/dl">GO</a> installed first
 <pre>
 git clone https://github.com/Jisin0/filmigobot
 cd filmigobot
@@ -99,6 +103,7 @@ Join our telegram channel for more latest news and cool projects
  - Thanks To [S](https://github.com/trojanzhex) for Their Awesome [Unlimited Filter Bot](https://github.com/TroJanzHEX/Unlimited-Filter-Bot)
 
 ## Disclaimer
-[![GNU Affero General Public License 2.0](https://www.gnu.org/graphics/agplv3-155x51.png)](https://www.gnu.org/licenses/agpl-3.0.en.html#header)    
-Licensed under [GNU AGPL 2.0.](https://github.com/Jisin0/evamaria/blob/master/LICENSE)
-Selling The Codes To Other People For Money Is *Strictly Prohibited*.
+Any data obtained using the bot is not allowed to be used for commercial use. Please read the Privacy Policy of the respective movie database before using, sharing or modifying data from them.
+
+[![GNU Affero General Public License 3.0](https://www.gnu.org/graphics/agplv3-155x51.png)](https://www.gnu.org/licenses/agpl-3.0.en.html#header)    
+Licensed under [GNU AGPL 3.0.](https://github.com/Jisin0/filmigobot/blob/main/LICENSE).
