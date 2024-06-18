@@ -93,7 +93,7 @@ func GetIMDbTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboar
 	}
 
 	if title.Releaseinfo != "" {
-		captionBuilder.WriteString(fmt.Sprintf("<b>🗓 Rᴇʟᴇᴀsᴇ Iɴғᴏ:</b> <a href='%s'>%s</a>\n", title.URL+"/releaseinfo", title.Releaseinfo))
+		captionBuilder.WriteString(fmt.Sprintf("<b>🗓 Rᴇʟᴇᴀsᴇ Iɴғᴏ:</b> <a href='%s'>%s</a>\n", title.URL+"releaseinfo", title.Releaseinfo))
 	}
 
 	if title.Runtime != "" {
@@ -109,7 +109,7 @@ func GetIMDbTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboar
 	}
 
 	if title.Plot != "" {
-		captionBuilder.WriteString(fmt.Sprintf("<b>📋 Sᴛᴏʀy Lɪɴᴇ:</b> <tg-spoiler>%s<a href='%s'>..</a></tg-spoiler>\n", title.Plot, title.URL+"/plotsummary"))
+		captionBuilder.WriteString(fmt.Sprintf("<b>📋 Sᴛᴏʀy Lɪɴᴇ:</b> <tg-spoiler>%s<a href='%s'>..</a></tg-spoiler>\n", title.Plot, title.URL+"plotsummary"))
 	}
 
 	if len(title.Directors) > 0 {

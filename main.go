@@ -31,10 +31,14 @@ func main() {
 		}
 
 		http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
-			fmt.Fprintf(w, "Waku Waku")
+			fmt.Fprintf(w, "healthcheck")
 		})
 
-		http.ListenAndServe(":"+port, nil)
+		//nolint:gosec // I frankly don't care if it isn't ideal.
+		err := http.ListenAndServe(":"+port, nil)
+		if err != nil {
+			fmt.Printf("failed to start web server : %v\n", err)
+		}
 	}()
 
 	token := os.Getenv("BOT_TOKEN")
