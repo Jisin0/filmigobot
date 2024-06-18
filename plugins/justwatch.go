@@ -152,8 +152,16 @@ func GetJWTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboardB
 	if len(title.Offers) > 0 {
 		captionBuilder.WriteString("\n<blockquote expandable>")
 
+		var savedOffers []string
+
 		for _, offer := range title.Offers {
+			if contains(savedOffers, offer.URL) {
+				continue
+			}
+
 			captionBuilder.WriteString(fmt.Sprintf("[<b><a href='%s'>%s</a></b>] ", offer.URL, offer.Package.ClearName))
+
+			savedOffers = append(savedOffers, offer.URL)
 		}
 
 		captionBuilder.WriteString("</blockquote>")
