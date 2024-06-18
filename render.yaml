@@ -1,0 +1,12 @@
+services :
+   - type : web
+     name : gofilterbot
+     runtime : go
+     repo : https://github.com/Jisin0/filmigobot.git
+     buildCommand: go build .
+     startCommand: ./filmigobot
+     envVars :
+       - key : BOT_TOKEN
+         value : your-bots-token
+       - key : PORT
+         value : 10000

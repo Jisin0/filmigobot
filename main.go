@@ -22,6 +22,21 @@ const (
 )
 
 func main() {
+	// Run a useless http server to get a healthy build on koyeb/render
+	go func() {
+		port := os.Getenv("PORT")
+
+		if port == "" {
+			port = "8080"
+		}
+
+		http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
+			fmt.Fprintf(w, "Waku Waku")
+		})
+
+		http.ListenAndServe(":"+port, nil)
+	}()
+
 	token := os.Getenv("BOT_TOKEN")
 	if token == "" {
 		panic("exiting because no BOT_TOKEN provided")

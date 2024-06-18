@@ -1,0 +1,29 @@
+{
+    "name": "filmigobot",
+    "description": "Inline Telegram bot to Search Multiple Movie Databases",
+    "keywords": [
+        "Go",
+        "filmigo",
+        "Telegram"
+    ],
+    "website": "https://github.com/Jisin0",
+    "repository": "https://github.com/Jisin0/filmigobot",
+    "success_url": "https://telegram.dog/Jisin0",
+    "env": {
+        "BOT_TOKEN": {
+            "description": "Your Bot Token From @BotFather",
+            "value": ""
+        }
+    },
+    "buildpacks": [
+        {
+            "url": "https://github.com/heroku/heroku-buildpack-go.git"
+        }
+    ],
+    "formation": {
+        "worker": {
+            "quantity": 1,
+            "size": "free"
+        }
+    }
+}

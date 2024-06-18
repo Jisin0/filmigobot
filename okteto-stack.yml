@@ -1,0 +1,8 @@
+services:
+  drone-vc-p:
+    build: .
+    environment:
+      BOT_TOKEN: $BOT_TOKEN
+    resources:
+      cpu: 1000m
+      memory: 3Gi
