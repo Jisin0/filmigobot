@@ -66,6 +66,7 @@ func CreateJWPoster(backdropURL, posterURL, id string) *bytes.Buffer {
 	draw.Draw(result, posterRect, poster, image.Point{}, draw.Over)
 
 	var buf bytes.Buffer
+
 	err = jpeg.Encode(&buf, result, &jpeg.Options{Quality: 100})
 	if err != nil {
 		fmt.Println("Error saving result:", err)
@@ -77,13 +78,14 @@ func CreateJWPoster(backdropURL, posterURL, id string) *bytes.Buffer {
 
 // loadImage loads an image from a URL
 func loadImage(url string) (image.Image, error) {
-	resp, err := http.Get(url)
+	resp, err := http.Get(url) //nolint:gosec // can't make this a constant
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
 
 	contentType := resp.Header.Get("Content-Type")
+
 	var img image.Image
 
 	switch {

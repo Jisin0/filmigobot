@@ -113,11 +113,11 @@ func GetOMDbTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboar
 		captionBuilder.WriteString(fmt.Sprintf("<b>🕰 Dᴜʀᴀᴛɪᴏɴ:</b> <code>%s</code>\n", title.Runtime))
 	}
 
-	if len(title.Languages) > 0 {
+	if title.Languages != notAvailable {
 		captionBuilder.WriteString(fmt.Sprintf("<b>🎧 Lᴀɴɢᴜᴀɢᴇ:</b> %s\n", title.Languages))
 	}
 
-	if len(title.Genres) > 0 {
+	if title.Genres != notAvailable {
 		captionBuilder.WriteString(fmt.Sprintf("<b>🎭 Gᴇɴʀᴇs:</b> <i>%s</i>\n", title.Genres))
 	}
 

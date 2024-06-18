@@ -41,7 +41,9 @@ func htmlLinkList(elems types.Links, sep string) string {
 	}
 
 	var b strings.Builder
+
 	b.WriteString(fmt.Sprintf("<a href='%s'>%s</a>", elems[0].Href, elems[0].Text))
+
 	for _, e := range elems[1:] {
 		b.WriteString(sep)
 		b.WriteString(fmt.Sprintf("<a href='%s'>%s</a>", e.Href, e.Text))
@@ -52,19 +54,22 @@ func htmlLinkList(elems types.Links, sep string) string {
 
 // Pretty much what it says.
 func capitalizeFirstLetter(s string) string {
-	if len(s) == 0 {
+	if s == "" {
 		return s
 	}
+
 	runes := []rune(s)
 	runes[0] = unicode.ToUpper(runes[0])
+
 	return string(runes)
 }
 
 // Returns a html formatted string that mention's the user
 func mention(u *gotgbot.User) string {
-	var name string = u.FirstName
+	name := u.FirstName
 	if u.LastName != "" {
 		name = name + " " + u.LastName
 	}
+
 	return fmt.Sprintf("<a href='tg://user?id=%v'>%v</a>", u.Id, name)
 }

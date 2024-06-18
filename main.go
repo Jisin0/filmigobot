@@ -17,6 +17,10 @@ import (
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers/filters/inlinequery"
 )
 
+const (
+	defaultGetUpdatesSleep = 15 // number of seconds to sleep when getUpdates fails
+)
+
 func main() {
 	token := os.Getenv("BOT_TOKEN")
 	if token == "" {
@@ -36,11 +40,12 @@ func main() {
 		panic("failed to create new bot: " + err.Error())
 	}
 
-	//To make sure no other instance of the bot is running
+	// To make sure no other instance of the bot is running
 	_, err = b.GetUpdates(&gotgbot.GetUpdatesOpts{})
 	if err != nil {
 		fmt.Println("duplicate instance found: waiting 15s to fetch updates")
-		time.Sleep(time.Second * 15)
+		time.Sleep(time.Second * defaultGetUpdatesSleep)
+
 		return
 	}
 
@@ -65,6 +70,7 @@ func main() {
 	if err != nil {
 		panic("failed to start polling: " + err.Error())
 	}
+
 	fmt.Printf("@%s Started !\n", b.User.Username)
 
 	// Idle, to keep updates coming in, and avoid bot stopping.

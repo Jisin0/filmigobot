@@ -21,8 +21,14 @@ linters-settings:
   govet:
     shadow: true
   nolintlint:
-    require-explanation: true
+    require-explanation: false
     require-specific: true
+  prealloc:
+    range-loops: false
+  mnd:
+    ignored-numbers:
+      - '100'
+      - '2'
 
 linters:
   disable-all: true

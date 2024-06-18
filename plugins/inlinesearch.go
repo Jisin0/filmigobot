@@ -61,9 +61,8 @@ func InlineQueryHandler(bot *gotgbot.Bot, ctx *ext.Context) error {
 	fullQuery := update.Query
 	if len(fullQuery) < 1 {
 		_, err := update.Answer(bot, []gotgbot.InlineQueryResult{}, &gotgbot.AnswerInlineQueryOpts{CacheTime: defaultCacheTime, Button: startSearchingButton})
-		if err != nil {
-			fmt.Println(err)
-		}
+
+		return err
 	}
 
 	var (
@@ -83,23 +82,21 @@ func InlineQueryHandler(bot *gotgbot.Bot, ctx *ext.Context) error {
 			CacheTime: defaultCacheTime,
 			Button:    searchResultsButton,
 		})
-		if err != nil {
-			fmt.Println(err)
-		}
+
+		return err
 	}
 
 	_, err := update.Answer(bot, results, &gotgbot.AnswerInlineQueryOpts{
 		CacheTime: defaultCacheTime,
 		Button:    searchResultsButton,
 	})
-	if err != nil {
-		fmt.Printf("error while answering inline query %v\n", err)
-	}
 
-	return nil
+	return err
 }
 
 // Returns inline results based on given method.
+//
+//nolint:unparam // linter claims I don't use fullQuery.
 func getInlineResults(method, query, fullQuery string) []gotgbot.InlineQueryResult {
 	switch method {
 	case searchMethodJW:

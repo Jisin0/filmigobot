@@ -25,3 +25,6 @@ go.work.sum
 # Ignore filmigo caches
 /.imdbcache
 /.omdbcache
+
+# Vscode workspace configs
+/.vscode

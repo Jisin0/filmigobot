@@ -3,6 +3,7 @@ package plugins
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"mime/multipart"
@@ -72,7 +73,8 @@ func UploadTelegraph(data *bytes.Buffer, mediaType string) (string, error) {
 		if er != nil {
 			fmt.Println(er)
 		}
-		return "", fmt.Errorf(err.Error)
+
+		return "", errors.New(err.Error)
 	}
 
 	return "telegra.ph" + jsonData.Source[0].Src, err

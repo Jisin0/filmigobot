@@ -18,6 +18,8 @@ const (
 	jWBanner   = "https://telegra.ph/file/23a8bea137de034392f29.jpg"
 	jWLogo     = "https://upload.wikimedia.org/wikipedia/commons/e/e1/JustWatch.png"
 	jWHomepage = "https://justwatch.com"
+
+	decriptionMaxLength = 200
 )
 
 var (
@@ -65,8 +67,8 @@ func buildSearchCaption(item *justwatch.TitlePreview) string {
 		description = item.ShortDescription
 	)
 
-	if len(description) > 200 {
-		description = description[0:200]
+	if len(description) > decriptionMaxLength {
+		description = description[0:decriptionMaxLength]
 	}
 
 	builder.WriteString(fmt.Sprintf("🎯 <b><a href='%s'>%s (%v)</a></b>\n", jWHomepage+item.Path, item.OriginalTitle, item.OriginalReleaseYear))
@@ -127,6 +129,7 @@ func GetJWTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboardB
 
 	if content.ExteranlIDs != nil && content.ExteranlIDs.ImdbID != "" {
 		captionBuilder.WriteString(fmt.Sprintf("<b>🚦𝙸ᴍᴅʙ:</b> <i><a href='imdb.com/title/%s'>%s", content.ExteranlIDs.ImdbID, content.ExteranlIDs.ImdbID))
+
 		if content.Scores != nil && content.Scores.ImdbRating > 0 {
 			captionBuilder.WriteString(fmt.Sprintf(" | %v/10 ⭐", content.Scores.ImdbRating))
 		}
@@ -165,6 +168,7 @@ func GetJWTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboardB
 			posterURL = s
 		} else {
 			file := CreateJWPoster(content.FullBackdrops[0].FullURL(), posterURL, id)
+
 			tGraphURL, err := UploadTelegraph(file, "photo")
 			if err == nil {
 				posterURL = tGraphURL
@@ -181,6 +185,7 @@ func GetJWTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboardB
 
 	if len(content.Clips) > 0 {
 		var row []gotgbot.InlineKeyboardButton
+
 		switch len(content.Clips) {
 		case 1:
 			row = append(row, gotgbot.InlineKeyboardButton{Text: content.Clips[0].Name, Url: content.Clips[0].URL})
@@ -191,6 +196,7 @@ func GetJWTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboardB
 				}
 
 				row = append(row, gotgbot.InlineKeyboardButton{Text: fmt.Sprintf("Clip %v", n+1), Url: clip.URL})
+
 				if n >= 2 {
 					break
 				}
