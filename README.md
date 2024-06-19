@@ -1,5 +1,6 @@
 # filmigobot
 [![telegram badge](https://img.shields.io/badge/Telegram-Channel-30302f?style=flat&logo=telegram)](https://telegram.dog/FractalProjects)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Jisin0/filmigo)](https://goreportcard.com/report/github.com/Jisin0/filmigo)
 [![Go Build](https://github.com/Jisin0/filmigobot/workflows/Go/badge.svg)](https://github.com/Jisin0/filmigobot/actions?query=workflow%3AGo+event%3Apush+branch%3Amain)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
