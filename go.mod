@@ -4,7 +4,7 @@ go 1.22.1
 
 require (
 	github.com/Jisin0/filmigo v0.2.3
-	github.com/PaulSonOfLars/gotgbot/v2 v2.0.0-rc.24
+	github.com/PaulSonOfLars/gotgbot/v2 v2.0.0-rc.27
 	github.com/fogleman/gg v1.3.0
 	golang.org/x/image v0.17.0
 )
