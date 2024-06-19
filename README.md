@@ -108,7 +108,7 @@ go build .
 ## Thanks
 
  - Thanks to Paul for his awesome [Library](https://github.com/PaulSonOfLars/gotgbot)
- - Thanks To [SpEcHIDe](https://github.com/SpEcHIDe) for his awesome [IMDbot](https://github.com/TelegramPlayGround/IMDbOT)
+ - Thanks To [SpEcHIDe](https://github.com/SpEcHIDe) for his awesome [IMDbOT](https://github.com/TelegramPlayGround/IMDbOT)
 
 ## Disclaimer
 Any data obtained using the bot is not allowed to be used for commercial use. Please read the Privacy Policy of the respective movie database before using, sharing or modifying data from them.
