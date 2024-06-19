@@ -3,6 +3,7 @@ services:
     build: .
     environment:
       BOT_TOKEN: $BOT_TOKEN
+      DEFAULT_SEARCH_METHOD: $DEFAULT_SEARCH_METHOD
     resources:
       cpu: 1000m
       memory: 3Gi

@@ -1,15 +1,19 @@
 # filmigobot
+[![telegram badge](https://img.shields.io/badge/Telegram-Channel-30302f?style=flat&logo=telegram)](https://telegram.dog/FractalProjects)
 
-**filmigobot** is a fully serverless high-performace inline telegram bot to search different movie databases using the [filmigo library](https://github.com/Jisin0/filmigo) written in [GO](https://go.dev). It is designed to be easily deplyed to Vercel but has support almost any other servers. It currently supports IMDb, JustWatch and OMDb.
+[**filmigobot** ](https://filmigobot.vercel.app) is a fully serverless high-performace inline telegram bot to search different movie databases using the [filmigo library](https://github.com/Jisin0/filmigo) written in [GO](https://go.dev). It is designed to be easily deplyed to Vercel but has support almost any other servers. It currently supports IMDb, JustWatch and OMDb.
 
-Connect a new bot to the [Public App](https://filmigobot.vercel.app) now or deploy a new instance following the instructions below. 
+Connect a new bot to the [Public App](https://filmigobot.vercel.app) now or deploy a new instance following the instructions below.
+[Sample Bot](https://telegram.dog/SurfOTTBot)
 
 ## Variables
 
-- [ ] `BOT_TOKEN`  : Optional. On vercel, a list of bot tokens allowed to connect to the app or leave empty allow anyone to connect. On servers, a single bot token.
+- `BOT_TOKEN`  : Optional. On vercel, a list of bot tokens allowed to connect to the app or leave empty allow anyone to connect. On servers, a single bot token.
+- `DEFAULT_SEARCH_METHOD` : The default method to use for inline search. Possible values are jw, imdb & omdb.
 
 ## Deploy
-
+Deploy your own **filmigobot** app to vercel:
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/project?template=https://github.com/Jisin0/filmigobot/tree/main&env=BOT_TOKEN&envDescription=List%20of%20of%20allowed%20bot%20tokens%20or%20leave%20empty%20to%20allow%20all)
 
 <details><summary>Deploy To Heroku</summary>
 <p>
@@ -89,18 +93,10 @@ go build .
 </p>
 </details>
 
-## Support
-
-Ask any doubts or help in our support chat.
-[![telegram badge](https://img.shields.io/badge/Telegram-Group-30302f?style=flat&logo=telegram)](https://telegram.dog/jisin_hub)
-
-Join our telegram channel for more latest news and cool projects
-[![telegram badge](https://img.shields.io/badge/Telegram-Channel-30302f?style=flat&logo=telegram)](https://telegram.dog/jisin_0)
-
 ## Thanks
 
  - Thanks to Paul for his awesome [Library](https://github.com/PaulSonOfLars/gotgbot)
- - Thanks To [S](https://github.com/trojanzhex) for Their Awesome [Unlimited Filter Bot](https://github.com/TroJanzHEX/Unlimited-Filter-Bot)
+ - Thanks To [SpEcHIDe](https://github.com/SpEcHIDe) for his awesome [IMDbot](https://github.com/TelegramPlayGround/IMDbOT)
 
 ## Disclaimer
 Any data obtained using the bot is not allowed to be used for commercial use. Please read the Privacy Policy of the respective movie database before using, sharing or modifying data from them.

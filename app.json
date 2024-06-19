@@ -13,6 +13,10 @@
         "BOT_TOKEN": {
             "description": "Your Bot Token From @BotFather",
             "value": ""
+        },
+        "DEFAULT_SEARCH_METHOD": {
+            "description": "The default method to use for inline search. Possible values are jw, imdb & omdb.",
+            "value": ""
         }
     },
     "buildpacks": [

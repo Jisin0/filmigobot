@@ -12,14 +12,13 @@ import (
 	"github.com/PaulSonOfLars/gotgbot/v2"
 )
 
-var jWClient = justwatch.NewClient(&justwatch.JustwatchClientOpts{Country: "US"})
-
 const (
 	jWBanner   = "https://telegra.ph/file/23a8bea137de034392f29.jpg"
 	jWLogo     = "https://upload.wikimedia.org/wikipedia/commons/e/e1/JustWatch.png"
 	jWHomepage = "https://justwatch.com"
 
 	decriptionMaxLength = 200
+	jWCountryCode       = "US"
 )
 
 var (
@@ -27,6 +26,8 @@ var (
 	// map to cache tgraph url of images.
 	jWPosterCache = make(map[string]string)
 )
+
+var jWClient = justwatch.NewClient(&justwatch.JustwatchClientOpts{Country: jWCountryCode})
 
 // JWInlineSearch searches for query on justwatch and returns results to be used in inline queries.
 func JWInlineSearch(query string) []gotgbot.InlineQueryResult {
