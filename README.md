@@ -3,7 +3,7 @@
 [![Go Build](https://github.com/Jisin0/filmigobot/workflows/Go/badge.svg)](https://github.com/Jisin0/filmigobot/actions?query=workflow%3AGo+event%3Apush+branch%3Amain)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-[**filmigobot** ](https://filmigobot.vercel.app) is a fully serverless high-performace inline telegram bot to search different movie databases using the [filmigo library](https://github.com/Jisin0/filmigo) written in [GO](https://go.dev). It is designed to be easily deplyed to Vercel but has support almost any other servers. It currently supports IMDb, JustWatch and OMDb.
+[**filmigobot** ](https://filmigobot.vercel.app) is a fully serverless high-performace inline telegram bot to search different movie databases using the [filmigo library](https://github.com/Jisin0/filmigo) written in [GO](https://go.dev). It is designed to be easily deployed to Vercel but has support almost any other servers. It currently supports IMDb, JustWatch and OMDb.
 
 Connect a new bot to the [Public App](https://filmigobot.vercel.app) now or deploy a new instance following the instructions below.
 [Sample Bot](https://telegram.dog/SurfOTTBot)
