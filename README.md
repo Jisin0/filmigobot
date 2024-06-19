@@ -1,6 +1,7 @@
 # filmigobot
 [![telegram badge](https://img.shields.io/badge/Telegram-Channel-30302f?style=flat&logo=telegram)](https://telegram.dog/FractalProjects)
 [![Go Build](https://github.com/Jisin0/filmigobot/workflows/Go/badge.svg)](https://github.com/Jisin0/filmigobot/actions?query=workflow%3AGo+event%3Apush+branch%3Amain)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 [**filmigobot** ](https://filmigobot.vercel.app) is a fully serverless high-performace inline telegram bot to search different movie databases using the [filmigo library](https://github.com/Jisin0/filmigo) written in [GO](https://go.dev). It is designed to be easily deplyed to Vercel but has support almost any other servers. It currently supports IMDb, JustWatch and OMDb.
 
@@ -113,4 +114,4 @@ go build .
 Any data obtained using the bot is not allowed to be used for commercial use. Please read the Privacy Policy of the respective movie database before using, sharing or modifying data from them.
 
 [![GNU Affero General Public License 3.0](https://www.gnu.org/graphics/agplv3-155x51.png)](https://www.gnu.org/licenses/agpl-3.0.en.html#header)    
-Licensed under [GNU AGPL 3.0.](https://github.com/Jisin0/filmigobot/blob/main/LICENSE).
+Licensed under [GNU GPL 3.0.](https://github.com/Jisin0/filmigobot/blob/main/LICENSE).
