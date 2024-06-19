@@ -12,7 +12,8 @@ Connect a new bot to the [Public App](https://filmigobot.vercel.app) now or depl
 - `DEFAULT_SEARCH_METHOD` : The default method to use for inline search. Possible values are jw, imdb & omdb.
 
 ## Deploy
-Deploy your own **filmigobot** app to vercel:
+Deploy your own **filmigobot** app to vercel
+
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/project?template=https://github.com/Jisin0/filmigobot/tree/main&env=BOT_TOKEN&envDescription=List%20of%20of%20allowed%20bot%20tokens%20or%20leave%20empty%20to%20allow%20all)
 
 <details><summary>Deploy To Heroku</summary>
@@ -20,6 +21,15 @@ Deploy your own **filmigobot** app to vercel:
 <br>
 <a href="https://heroku.com/deploy?template=https://github.com/Jisin0/filmigobot/tree/main">
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
+</a>
+</p>
+</details>
+
+<details><summary>Deploy To Scalingo</summary>
+<p>
+<br>
+<a href="https://dashboard.scalingo.com/create/app?source=https://github.com/Jisin0/filmigobot#main">
+   <img src="https://cdn.scalingo.com/deploy/button.svg" alt="Deploy on Scalingo" data-canonical-src="https://cdn.scalingo.com/deploy/button.svg" style="max-width:100%;">
 </a>
 </p>
 </details>

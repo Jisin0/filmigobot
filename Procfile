@@ -1,1 +1,1 @@
-worker: ./bin/filmigobot
+web: ./bin/filmigobot
