@@ -216,7 +216,7 @@ func GetJWTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboardB
 	}
 
 	photo = gotgbot.InputMediaPhoto{
-		Media:      posterURL,
+		Media:      gotgbot.InputFileByURL(posterURL),
 		Caption:    captionBuilder.String(),
 		ParseMode:  gotgbot.ParseModeHTML,
 		HasSpoiler: true,

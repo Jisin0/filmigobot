@@ -129,7 +129,7 @@ func GetIMDbTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboar
 	}
 
 	photo = gotgbot.InputMediaPhoto{
-		Media:      title.PosterURL,
+		Media:      gotgbot.InputFileByURL(title.PosterURL),
 		Caption:    captionBuilder.String(),
 		ParseMode:  gotgbot.ParseModeHTML,
 		HasSpoiler: true,
