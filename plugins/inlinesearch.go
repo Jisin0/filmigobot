@@ -16,6 +16,13 @@ var (
 	defaulSearchMethod = searchMethodJW
 )
 
+// Search methods with a whitespace added after for a seamless search.
+var (
+	inlineIMDbSwitch = searchMethodIMDb + " "
+	inlineJWSwitch   = searchMethodJW + " "
+	inlineOMDbSwitch = searchMethodOMDb + " "
+)
+
 var (
 	startSearchingButton = &gotgbot.InlineQueryResultsButton{Text: "Start typing the name of your movie to search ...", StartParameter: "nvm"}
 	searchResultsButton  = &gotgbot.InlineQueryResultsButton{Text: "Here Are Your Results 👇", StartParameter: "nvm2"}
@@ -23,8 +30,8 @@ var (
 	notFoundImage = "https://telegra.ph/file/d80303cbff7d4e93bb2e8.png"
 
 	inlineSearchButtons = [][]gotgbot.InlineKeyboardButton{
-		{{Text: "📺 Search IMDb", SwitchInlineQueryCurrentChat: &searchMethodIMDb}},
-		{{Text: "💻 Search OTT", SwitchInlineQueryCurrentChat: &searchMethodJW}},
+		{{Text: "📺 Search IMDb", SwitchInlineQueryCurrentChat: &inlineIMDbSwitch}},
+		{{Text: "💻 Search OTT", SwitchInlineQueryCurrentChat: &inlineJWSwitch}},
 	}
 
 	noResultsArticle = gotgbot.InlineQueryResultArticle{
