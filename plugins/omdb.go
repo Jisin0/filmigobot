@@ -27,7 +27,7 @@ func init() {
 	if key := os.Getenv("OMDB_API_KEY"); key != notAvailable {
 		omdbClient = omdb.NewClient(key)
 
-		inlineSearchButtons = append(inlineSearchButtons, []gotgbot.InlineKeyboardButton{{Text: "🔍 Search OMDb", SwitchInlineQueryCurrentChat: &searchMethodOMDb}})
+		inlineSearchButtons = append(inlineSearchButtons, []gotgbot.InlineKeyboardButton{{Text: "🔍 Search OMDb", SwitchInlineQueryCurrentChat: &inlineOMDbSwitch}})
 	}
 }
 
