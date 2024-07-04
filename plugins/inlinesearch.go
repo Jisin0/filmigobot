@@ -14,6 +14,7 @@ import (
 
 var (
 	defaulSearchMethod = searchMethodJW
+	allSearchMethods   = []string{searchMethodIMDb, searchMethodOMDb, searchMethodJW}
 )
 
 // Search methods with a whitespace added after for a seamless search.
@@ -73,7 +74,7 @@ func InlineQueryHandler(bot *gotgbot.Bot, ctx *ext.Context) error {
 	}
 
 	var (
-		method = defaulSearchMethod
+		method string
 		query  = fullQuery
 	)
 
@@ -81,6 +82,12 @@ func InlineQueryHandler(bot *gotgbot.Bot, ctx *ext.Context) error {
 	if len(args) > 1 {
 		method = strings.ToLower(args[0])
 		query = args[1]
+	}
+
+	if contains(allSearchMethods, method) && len(query) < 1 {
+		_, err := update.Answer(bot, []gotgbot.InlineQueryResult{}, &gotgbot.AnswerInlineQueryOpts{CacheTime: defaultCacheTime, Button: startSearchingButton})
+
+		return err
 	}
 
 	results := getInlineResults(method, query, fullQuery)
