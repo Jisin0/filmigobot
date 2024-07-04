@@ -26,7 +26,7 @@ This bot is only for limited non-commercial use of <a href='https://help.imdb.co
 </blockquote>
 `
 
-	startButtons = append(inlineSearchButtons, []gotgbot.InlineKeyboardButton{{Text: "Source Code", Url: "github.com/Jisin0/filmigobot"}})
+	startButtons = append(inlineSearchButtons, []gotgbot.InlineKeyboardButton{{Text: "🚀 𝘜𝘱𝘥𝘢𝘵𝘦𝘴 🚀", Url: "https://t.me/piroxbots"}})
 )
 
 func Start(bot *gotgbot.Bot, ctx *ext.Context) error {
