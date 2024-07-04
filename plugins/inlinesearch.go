@@ -28,7 +28,7 @@ var (
 	startSearchingButton = &gotgbot.InlineQueryResultsButton{Text: "Start typing the name of your movie to search ...", StartParameter: "nvm"}
 	searchResultsButton  = &gotgbot.InlineQueryResultsButton{Text: "Here Are Your Results 👇", StartParameter: "nvm2"}
 
-	notFoundImage = "https://telegra.ph/file/d80303cbff7d4e93bb2e8.png"
+	notFoundImage = "https://telegra.ph/file/24788bfd2b087c292fbe2.jpg"
 
 	inlineSearchButtons = [][]gotgbot.InlineKeyboardButton{
 		{{Text: "📺 Search IMDb", SwitchInlineQueryCurrentChat: &inlineIMDbSwitch}},
