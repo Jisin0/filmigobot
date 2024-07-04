@@ -78,11 +78,11 @@ func GetIMDbTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboar
 	captionBuilder.WriteString("</a></b>\n")
 
 	if title.Aka != "" {
-		captionBuilder.WriteString(fmt.Sprintf("   [ᴀᴋᴀ: <code>%s</code>]\n", title.Aka))
+		captionBuilder.WriteString(fmt.Sprintf("   [AKA: <code>%s</code>]\n", title.Aka))
 	}
 
 	if rating := title.Rating; rating.Value > 0 {
-		captionBuilder.WriteString(fmt.Sprintf("<b>🏆 Usᴇʀ Rᴀᴛɪɴɢs: %.1f / 10 </b>", rating.Value))
+		captionBuilder.WriteString(fmt.Sprintf("<b>🏆 User Ratings: %.1f / 10 </b>", rating.Value))
 		captionBuilder.WriteString(fmt.Sprintf("<code>(based on %v votes ", rating.Votes))
 
 		if rating.Best > 0 {
@@ -93,35 +93,35 @@ func GetIMDbTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboar
 	}
 
 	if title.Releaseinfo != "" {
-		captionBuilder.WriteString(fmt.Sprintf("<b>🗓 Rᴇʟᴇᴀsᴇ Iɴғᴏ:</b> <a href='%s'>%s</a>\n", title.URL+"releaseinfo", title.Releaseinfo))
+		captionBuilder.WriteString(fmt.Sprintf("<b>🗓 Release Info:</b> <a href='%s'>%s</a>\n", title.URL+"releaseinfo", title.Releaseinfo))
 	}
 
 	if title.Runtime != "" {
-		captionBuilder.WriteString(fmt.Sprintf("<b>🕰 Dᴜʀᴀᴛɪᴏɴ:</b> <code>%s</code>\n", parseIMDbDuration(title.Runtime)))
+		captionBuilder.WriteString(fmt.Sprintf("<b>🕰 Duration:</b> <code>%s</code>\n", parseIMDbDuration(title.Runtime)))
 	}
 
 	if len(title.Languages) > 0 {
-		captionBuilder.WriteString(fmt.Sprintf("<b>🎧 Lᴀɴɢᴜᴀɢᴇ:</b> %s\n", htmlLinkList(title.Languages, "|")))
+		captionBuilder.WriteString(fmt.Sprintf("<b>🎧 Language:</b> %s\n", htmlLinkList(title.Languages, "|")))
 	}
 
 	if len(title.Genres) > 0 {
-		captionBuilder.WriteString(fmt.Sprintf("<b>🎭 Gᴇɴʀᴇs:</b> <i>%s</i>\n", strings.Join(title.Genres, ", ")))
+		captionBuilder.WriteString(fmt.Sprintf("<b>🎭 Genres:</b> <i>%s</i>\n", strings.Join(title.Genres, ", ")))
 	}
 
 	if title.Plot != "" {
-		captionBuilder.WriteString(fmt.Sprintf("<b>📋 Sᴛᴏʀy Lɪɴᴇ:</b> <tg-spoiler>%s<a href='%s'>..</a></tg-spoiler>\n", title.Plot, title.URL+"plotsummary"))
+		captionBuilder.WriteString(fmt.Sprintf("<b>📋 Story Line:</b> <tg-spoiler>%s<a href='%s'>..</a></tg-spoiler>\n", title.Plot, title.URL+"plotsummary"))
 	}
 
 	if len(title.Directors) > 0 {
-		captionBuilder.WriteString(fmt.Sprintf("<b>🎥 Dɪʀᴇᴄᴛᴏʀ:</b> %s\n", htmlLinkList(title.Directors, " ")))
+		captionBuilder.WriteString(fmt.Sprintf("<b>🎥 Director:</b> %s\n", htmlLinkList(title.Directors, " ")))
 	}
 
 	if len(title.Actors) > 0 {
-		captionBuilder.WriteString(fmt.Sprintf("<b>🎎 Aᴄᴛᴏʀs:</b> %s\n", htmlLinkList(title.Actors, " ")))
+		captionBuilder.WriteString(fmt.Sprintf("<b>🎎 Actors/Actress:</b> %s\n", htmlLinkList(title.Actors, " ")))
 	}
 
 	if len(title.Writers) > 0 {
-		captionBuilder.WriteString(fmt.Sprintf("<b>✍️ Wʀɪᴛᴇʀ:</b> %s\n", htmlLinkList(title.Writers, " ")))
+		captionBuilder.WriteString(fmt.Sprintf("<b>✍️ Writer:</b> %s\n", htmlLinkList(title.Writers, " ")))
 	}
 
 	if title.Trailer.URL != "" {

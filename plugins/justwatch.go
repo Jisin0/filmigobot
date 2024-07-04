@@ -115,7 +115,7 @@ func GetJWTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboardB
 	captionBuilder.WriteRune('\n')
 
 	if content.OriginalTitle != content.Title {
-		captionBuilder.WriteString(fmt.Sprintf("<i>  aka : %s\n</i>", content.OriginalTitle))
+		captionBuilder.WriteString(fmt.Sprintf("<i>  AKA : %s\n</i>", content.OriginalTitle))
 	}
 
 	if content.Interactions != nil {
@@ -129,7 +129,7 @@ func GetJWTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboardB
 	captionBuilder.WriteRune('\n')
 
 	if content.ExteranlIDs != nil && content.ExteranlIDs.ImdbID != "" {
-		captionBuilder.WriteString(fmt.Sprintf("<b>🚦𝙸ᴍᴅʙ:</b> <i><a href='imdb.com/title/%s'>%s", content.ExteranlIDs.ImdbID, content.ExteranlIDs.ImdbID))
+		captionBuilder.WriteString(fmt.Sprintf("<b>🚦IMDb:</b> <i><a href='imdb.com/title/%s'>%s", content.ExteranlIDs.ImdbID, content.ExteranlIDs.ImdbID))
 
 		if content.Scores != nil && content.Scores.ImdbRating > 0 {
 			captionBuilder.WriteString(fmt.Sprintf(" | %v/10 ⭐", content.Scores.ImdbRating))
@@ -139,15 +139,15 @@ func GetJWTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboardB
 	}
 
 	if content.ReleaseDate != "" {
-		captionBuilder.WriteString(fmt.Sprintf("<b>🗓️ Rᴇʟᴇᴀsᴇᴅ:</b> %s\n", content.ReleaseDate))
+		captionBuilder.WriteString(fmt.Sprintf("<b>🗓️ Released:</b> %s\n", content.ReleaseDate))
 	}
 
 	if content.Runtime != 0 {
-		captionBuilder.WriteString(fmt.Sprintf("<b>📟 Rᴜɴᴛɪᴍᴇ:</b> %vmins\n", content.Runtime))
+		captionBuilder.WriteString(fmt.Sprintf("<b>📟 Runtime:</b> %vmins\n", content.Runtime))
 	}
 
 	if len(*content.Genres) > 0 {
-		captionBuilder.WriteString(fmt.Sprintf("<b>🎭 Gᴇɴʀᴇs:</b> <i>%s</i>\n", content.Genres.ToString(", ")))
+		captionBuilder.WriteString(fmt.Sprintf("<b>🎭 Genres:</b> <i>%s</i>\n", content.Genres.ToString(", ")))
 	}
 
 	if len(title.Offers) > 0 {
