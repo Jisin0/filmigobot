@@ -5,6 +5,7 @@ package plugins
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 	"unicode"
 
@@ -23,12 +24,42 @@ func parseIMDbDuration(s string) string {
 }
 
 // Parses the duration of an imdb trailer ie. PT1M35S becomes 1:35.
-func parseIMDbTrailerDuration(s string) string {
-	s = strings.ReplaceAll(s, "PT", "")
-	s = strings.ReplaceAll(s, "M", ":")
-	s = strings.ReplaceAll(s, "S", "")
+func parseIMDbTrailerDuration(duration string) string {
+	duration = strings.ReplaceAll(duration, "PT", "")
 
-	return s
+	var (
+		minutes, seconds int
+		err              error
+	)
+
+	duration = strings.TrimSpace(duration)
+
+	for i := 0; i < len(duration); i++ {
+		if unicode.IsDigit(rune(duration[i])) {
+			continue
+		}
+
+		switch duration[i] {
+		case 'M':
+			minutes, err = strconv.Atoi(duration[:i])
+			if err != nil {
+				break
+			}
+
+			duration = duration[i+1:]
+			i = -1
+		case 'S':
+			seconds, err = strconv.Atoi(duration[:i])
+			if err != nil {
+				break
+			}
+
+			duration = duration[i+1:]
+		}
+	}
+
+	formattedDuration := fmt.Sprintf("%02d:%02d", minutes, seconds)
+	return formattedDuration
 }
 
 // Returns a html-formatted string from the given list.
