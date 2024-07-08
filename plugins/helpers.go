@@ -37,14 +37,24 @@ func htmlLinkList(elems types.Links, sep string) string {
 	case 0:
 		return ""
 	case 1:
+		if elems[0].Text == "" {
+			return ""
+		}
+
 		return fmt.Sprintf("<a href='%s'>%s</a>", elems[0].Href, elems[0].Text)
 	}
 
 	var b strings.Builder
 
-	b.WriteString(fmt.Sprintf("<a href='%s'>%s</a>", elems[0].Href, elems[0].Text))
+	if elems[0].Text != "" {
+		b.WriteString(fmt.Sprintf("<a href='%s'>%s</a>", elems[0].Href, elems[0].Text))
+	}
 
 	for _, e := range elems[1:] {
+		if e.Text == "" {
+			continue
+		}
+
 		b.WriteString(sep)
 		b.WriteString(fmt.Sprintf("<a href='%s'>%s</a>", e.Href, e.Text))
 	}

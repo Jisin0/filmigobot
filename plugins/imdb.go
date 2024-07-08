@@ -121,7 +121,9 @@ func GetIMDbTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboar
 	}
 
 	if len(title.Writers) > 0 {
-		captionBuilder.WriteString(fmt.Sprintf("<b>✍️ Wʀɪᴛᴇʀ:</b> %s\n", htmlLinkList(title.Writers, " ")))
+		if str := htmlLinkList(title.Writers, " "); str != "" { // th writers field can contain companies whose names aren't available resulting in an empty string
+			captionBuilder.WriteString(fmt.Sprintf("<b>✍️ Wʀɪᴛᴇʀ:</b> %s\n", str))
+		}
 	}
 
 	if title.Trailer.URL != "" {
