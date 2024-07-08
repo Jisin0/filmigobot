@@ -9,6 +9,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/Jisin0/filmigobot/plugins"
 	"github.com/PaulSonOfLars/gotgbot/v2"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext"
 )
@@ -64,17 +65,7 @@ func main() {
 		return
 	}
 
-	// Create updater and dispatcher.
-	dispatcher := ext.NewDispatcher(&ext.DispatcherOpts{
-		// If an error is returned by a handler, log it and continue going.
-		Error: func(b *gotgbot.Bot, ctx *ext.Context, err error) ext.DispatcherAction {
-			fmt.Println("an error occurred while handling update:", err.Error())
-			return ext.DispatcherActionNoop
-		},
-		MaxRoutines: ext.DefaultMaxRoutines,
-	})
-
-	updater := ext.NewUpdater(dispatcher, &ext.UpdaterOpts{})
+	updater := ext.NewUpdater(plugins.Dispatcher, &ext.UpdaterOpts{})
 
 	// Start receiving updates.
 	err = updater.StartPolling(b, &ext.PollingOpts{DropPendingUpdates: true, GetUpdatesOpts: &gotgbot.GetUpdatesOpts{AllowedUpdates: []string{"message", "callback_query", "inline_query", "chosen_inline_result"}}})

@@ -10,6 +10,7 @@ import (
 	"github.com/PaulSonOfLars/gotgbot/v2"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers"
+	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers/filters/callbackquery"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers/filters/choseninlineresult"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers/filters/inlinequery"
 )
@@ -30,6 +31,7 @@ const (
 func init() {
 	Dispatcher.AddHandlerToGroup(handlers.NewInlineQuery(inlinequery.All, InlineQueryHandler), 0)
 	Dispatcher.AddHandlerToGroup(handlers.NewChosenInlineResult(choseninlineresult.All, InlineResultHandler), 0)
+	Dispatcher.AddHandlerToGroup(handlers.NewCallback(callbackquery.All, CbCommand), 0)
 
 	Dispatcher.AddHandlerToGroup(handlers.NewCommand("start", Start), commandHandlerGroup)
 	Dispatcher.AddHandlerToGroup(handlers.NewMessage(allCommand, CommandHandler), commandHandlerGroup)

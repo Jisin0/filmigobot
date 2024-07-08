@@ -33,7 +33,7 @@ This bot does not connect to any datbase and hence does not store any user data 
 )
 
 var (
-	startButtons = append(inlineSearchButtons, []gotgbot.InlineKeyboardButton{{Text: "Source Code", Url: "github.com/Jisin0/filmigobot"}})
+	startButtons = append([][]gotgbot.InlineKeyboardButton{{{Text: "About ℹ️", CallbackData: "cmd_ABOUT"}, {Text: "Help ❓", CallbackData: "cmd_HELP"}}}, inlineSearchButtons...)
 )
 
 func Start(bot *gotgbot.Bot, ctx *ext.Context) error {
@@ -47,17 +47,55 @@ func Start(bot *gotgbot.Bot, ctx *ext.Context) error {
 	return ext.EndGroups
 }
 
+// CbCommand handles callback from command buttons.
+func CbCommand(bot *gotgbot.Bot, ctx *ext.Context) error {
+	update := ctx.CallbackQuery
+
+	split := strings.SplitN(update.Data, "_", 2)
+	if len(split) < 2 {
+		update.Answer(bot, &gotgbot.AnswerCallbackQueryOpts{Text: "Bad Callback Data !", ShowAlert: true})
+		return nil
+	}
+
+	var (
+		cmd     = strings.ToUpper(split[1])
+		text    string
+		buttons [][]gotgbot.InlineKeyboardButton
+	)
+
+	switch cmd {
+	case "START":
+		text = fmt.Sprintf(startText, mention(ctx.EffectiveUser))
+		buttons = startButtons
+	default:
+		if s, k := allTexts[cmd]; k {
+			text = s
+		} else {
+			text, _ = allTexts["NOTFOUND"]
+		}
+
+		buttons, _ = allButtons[cmd]
+	}
+
+	_, _, err := update.Message.EditText(bot, text, &gotgbot.EditMessageTextOpts{ParseMode: gotgbot.ParseModeHTML, ReplyMarkup: gotgbot.InlineKeyboardMarkup{InlineKeyboard: buttons}})
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return nil
+}
+
 // CommandHandler handles any command except start.
 func CommandHandler(bot *gotgbot.Bot, ctx *ext.Context) error {
-	msg := ctx.EffectiveMessage
+	update := ctx.EffectiveMessage
 
-	cmd := strings.ToUpper(strings.Split(strings.ToLower(strings.Fields(msg.GetText())[0]), "@")[0][1:])
+	cmd := strings.ToUpper(strings.Split(strings.ToLower(strings.Fields(update.GetText())[0]), "@")[0][1:])
 
 	var text string
 	if s, k := allTexts[cmd]; k {
 		text = s
 	} else {
-		if msg.Chat.Type != gotgbot.ChatTypePrivate {
+		if update.Chat.Type != gotgbot.ChatTypePrivate {
 			return nil
 		}
 
@@ -66,7 +104,7 @@ func CommandHandler(bot *gotgbot.Bot, ctx *ext.Context) error {
 
 	buttons, _ := allButtons[cmd]
 
-	_, err := bot.SendMessage(msg.Chat.Id, text, &gotgbot.SendMessageOpts{ParseMode: gotgbot.ParseModeHTML, LinkPreviewOptions: &gotgbot.LinkPreviewOptions{IsDisabled: true}, ReplyMarkup: gotgbot.InlineKeyboardMarkup{InlineKeyboard: buttons}})
+	_, err := bot.SendMessage(update.Chat.Id, text, &gotgbot.SendMessageOpts{ParseMode: gotgbot.ParseModeHTML, LinkPreviewOptions: &gotgbot.LinkPreviewOptions{IsDisabled: true}, ReplyMarkup: gotgbot.InlineKeyboardMarkup{InlineKeyboard: buttons}})
 	if err != nil {
 		fmt.Println(err)
 	}

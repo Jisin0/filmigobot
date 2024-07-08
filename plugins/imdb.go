@@ -18,6 +18,7 @@ var (
 
 const (
 	imdbLogo     = "https://telegra.ph/file/1720930421ae2b00d9bab.jpg"
+	imdbBanner   = "https://telegra.ph/file/2dd6f7c9ebfb237db4826.jpg"
 	imdbHomepage = "https://imdb.com"
 )
 

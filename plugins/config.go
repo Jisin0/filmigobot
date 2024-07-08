@@ -5,7 +5,7 @@ package plugins
 import "github.com/PaulSonOfLars/gotgbot/v2"
 
 var allTexts map[string]string = map[string]string{
-	"PRIVACY": `This bot does not connect to any datbase and hence does not store any user data in any form.`,
+	"PRIVACY": `<i>This bot does not connect to any datbase and hence <b>does not store any user data</b> in any form.</i>`,
 
 	"ABOUT": `
 ○ <b>Language</b>: <a href='https://go.dev'>GO</a>
@@ -15,12 +15,13 @@ var allTexts map[string]string = map[string]string{
 	`,
 
 	"HELP": `
-<i>Type my username into any chat to start searching for any movie.</i>
+<i>Type my <b>username</b> into any chat to start <b>searching</b> for any movie 👉</i>
 
-Here's a list of my available commands:
+<i>Here's a list of my available commands:</i>
   /start : Start the bot.
   /about : Get some data about the bot.
   /help  : Display this help message.
+  /privacy: Read how this bot uses your data.
 
 <i>Use the buttons below to search for a movie here 👇</i>
 `,
@@ -31,4 +32,7 @@ Check /help to see how to use me.</i>
 `,
 }
 
-var allButtons map[string][][]gotgbot.InlineKeyboardButton = map[string][][]gotgbot.InlineKeyboardButton{}
+var allButtons map[string][][]gotgbot.InlineKeyboardButton = map[string][][]gotgbot.InlineKeyboardButton{
+	"ABOUT": {{{Text: "Home", CallbackData: "cmd_START"}, {Text: "Help", CallbackData: "cmd_HELP"}}},
+	"HELP":  append(inlineSearchButtons, []gotgbot.InlineKeyboardButton{{Text: "About", CallbackData: "cmd_ABOUT"}, {Text: "Home", CallbackData: "cmd_START"}}),
+}
