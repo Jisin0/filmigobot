@@ -84,8 +84,8 @@ func mention(u *gotgbot.User) string {
 	return fmt.Sprintf("<a href='tg://user?id=%v'>%v</a>", u.Id, name)
 }
 
-// Checks if a string slice contains an item.
-func contains(l []string, v string) bool {
+// Checks if a string slice Contains an item.
+func Contains(l []string, v string) bool {
 	for _, i := range l {
 		if i == v {
 			return true

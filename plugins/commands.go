@@ -51,7 +51,7 @@ func Start(bot *gotgbot.Bot, ctx *ext.Context) error {
 func CommandHandler(bot *gotgbot.Bot, ctx *ext.Context) error {
 	msg := ctx.EffectiveMessage
 
-	cmd := strings.Split(strings.ToLower(strings.Fields(msg.GetText())[0]), "@")[0][1:]
+	cmd := strings.ToUpper(strings.Split(strings.ToLower(strings.Fields(msg.GetText())[0]), "@")[0][1:])
 
 	var text string
 	if s, k := allTexts[cmd]; k {

@@ -156,7 +156,7 @@ func GetJWTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboardB
 		var savedOffers []string
 
 		for _, offer := range title.Offers {
-			if contains(savedOffers, offer.URL) {
+			if Contains(savedOffers, offer.URL) {
 				continue
 			}
 

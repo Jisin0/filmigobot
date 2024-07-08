@@ -7,12 +7,10 @@ import (
 	"net/http"
 	"os"
 	"path"
-	"slices"
 	"strings"
 
 	"github.com/Jisin0/filmigobot/plugins"
 	"github.com/PaulSonOfLars/gotgbot/v2"
-	"github.com/PaulSonOfLars/gotgbot/v2/ext"
 )
 
 var (
@@ -33,7 +31,7 @@ func Bot(w http.ResponseWriter, r *http.Request) {
 	bot, _ := gotgbot.NewBot(botToken, &gotgbot.BotOpts{DisableTokenCheck: true})
 
 	// Delete the webhook incase token is unauthorized.
-	if lenAllowedTokens > 0 && allowedTokens[0] != "" && !slices.Contains(allowedTokens, botToken) {
+	if lenAllowedTokens > 0 && allowedTokens[0] != "" && !plugins.Contains(allowedTokens, botToken) {
 		bot.DeleteWebhook(&gotgbot.DeleteWebhookOpts{}) //nolint:errcheck // It doesn't matter if it errors
 		w.WriteHeader(statusCodeSuccess)
 
@@ -58,27 +56,9 @@ func Bot(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ctx := ext.NewContext(&update, map[string]interface{}{})
-
-	if msg := ctx.Message; msg != nil {
-		if len(msg.Entities) > 0 {
-			if msg.Entities[0].Type == "bot_command" {
-				split := strings.Split(strings.ToLower(strings.Fields(msg.Text)[0]), "@")
-				cmd := split[0][1:]
-
-				if cmd == "start" {
-					err = plugins.Start(bot, ctx)
-				}
-			}
-		}
-	} else if ctx.InlineQuery != nil {
-		err = plugins.InlineQueryHandler(bot, ctx)
-	} else if ctx.ChosenInlineResult != nil {
-		err = plugins.InlineResultHandler(bot, ctx)
-	}
-
+	err = plugins.Dispatcher.ProcessUpdate(bot, &update, map[string]interface{}{})
 	if err != nil {
-		fmt.Printf("error while handling update %v\n", err)
+		fmt.Printf("error while processing update: %v", err)
 	}
 
 	w.WriteHeader(statusCodeSuccess)
