@@ -9,12 +9,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/Jisin0/filmigobot/plugins"
 	"github.com/PaulSonOfLars/gotgbot/v2"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext"
-	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers"
-	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers/filters/choseninlineresult"
-	"github.com/PaulSonOfLars/gotgbot/v2/ext/handlers/filters/inlinequery"
 )
 
 const (
@@ -77,10 +73,6 @@ func main() {
 		},
 		MaxRoutines: ext.DefaultMaxRoutines,
 	})
-
-	dispatcher.AddHandlerToGroup(handlers.NewInlineQuery(inlinequery.All, plugins.InlineQueryHandler), 0)
-	dispatcher.AddHandlerToGroup(handlers.NewChosenInlineResult(choseninlineresult.All, plugins.InlineResultHandler), 0)
-	dispatcher.AddHandlerToGroup(handlers.NewCommand("start", plugins.Start), 0)
 
 	updater := ext.NewUpdater(dispatcher, &ext.UpdaterOpts{})
 
