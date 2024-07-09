@@ -9,6 +9,15 @@
 Connect a new bot to the [Public App](https://filmigobot.vercel.app) now or deploy a new instance following the instructions below.
 [Sample Bot](https://telegram.dog/SurfOTTBot)
 
+## Commands
+```
+/start : Check if the bot is alive.
+/about: Basic Information About the bot.
+/help: Short Guide on How to Use the Bot.
+/imdb: Search or get a movie from IMDb.
+/jw: Search or get a movie from JustWatch
+```
+
 ## Variables
 
 - `BOT_TOKEN`  : Optional. On vercel, a list of bot tokens allowed to connect to the app or leave empty allow anyone to connect. On servers, a single bot token.
