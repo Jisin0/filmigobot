@@ -68,3 +68,50 @@ func getChosenResult(method, id string) (gotgbot.InputMediaPhoto, [][]gotgbot.In
 		return GetJWTitle(id)
 	}
 }
+
+// CbOpen handles callbacks from open_ buttons in search results.
+func CbOpen(bot *gotgbot.Bot, ctx *ext.Context) error {
+	update := ctx.CallbackQuery
+
+	// callback data structure: open_<method>_<id>
+
+	split := strings.Split(update.Data, "_")
+	if len(split) < 3 {
+		update.Answer(bot, &gotgbot.AnswerCallbackQueryOpts{Text: "Bad Callback Data !", ShowAlert: true})
+		return ext.EndGroups
+	}
+
+	var (
+		method = split[1]
+		id     = split[2]
+
+		photo   gotgbot.InputMediaPhoto
+		buttons [][]gotgbot.InlineKeyboardButton
+		err     error
+	)
+
+	switch method {
+	case searchMethodJW:
+		photo, buttons, err = GetJWTitle(id)
+	case searchMethodIMDb:
+		photo, buttons, err = GetIMDbTitle(id)
+	case searchMethodOMDb:
+		photo, buttons, err = GetOMDbTitle(id)
+	default:
+		fmt.Println("unknown method on cbopen: " + method)
+		photo, buttons, err = GetJWTitle(id)
+	}
+
+	if err != nil {
+		fmt.Printf("cbopen: %v", err)
+		update.Answer(bot, &gotgbot.AnswerCallbackQueryOpts{Text: "I Couldn't Fetch Data on That Movie 🤧\nPlease Try Again Later or Contact Admins !", ShowAlert: true})
+		return nil
+	}
+
+	_, _, err = update.Message.EditMedia(bot, photo, &gotgbot.EditMessageMediaOpts{ReplyMarkup: gotgbot.InlineKeyboardMarkup{InlineKeyboard: buttons}})
+	if err != nil {
+		fmt.Printf("cbopen: %v", err)
+	}
+
+	return nil
+}

@@ -24,13 +24,13 @@ var allTexts map[string]string = map[string]string{
   /privacy: Leran how this bot uses your data.
 
   /imdb: Search or get a movie from IMDb.
-  /justwatch: Search or get a movie from Justwatch
+  /jw: Search or get a movie from Justwatch
 
 <i>Use the buttons below to search for a movie here 👇</i>
 `,
 
 	"NOTFOUND": `
-<i>😐 I couldn't find that command !
+<i>😐 I don't recognize that command !
 Check /help to see how to use me.</i>
 `,
 }
