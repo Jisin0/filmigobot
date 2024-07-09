@@ -33,6 +33,13 @@ Check /help to see how to use me.</i>
 }
 
 var allButtons map[string][][]gotgbot.InlineKeyboardButton = map[string][][]gotgbot.InlineKeyboardButton{
-	"ABOUT": {{{Text: "Home", CallbackData: "cmd_START"}, {Text: "Help", CallbackData: "cmd_HELP"}}},
-	"HELP":  append(inlineSearchButtons, []gotgbot.InlineKeyboardButton{{Text: "About", CallbackData: "cmd_ABOUT"}, {Text: "Home", CallbackData: "cmd_START"}}),
+	"ABOUT": {{homeButton, helpButton}},
+	"HELP":  append(inlineSearchButtons, []gotgbot.InlineKeyboardButton{aboutButton, homeButton}),
 }
+
+// Single buttons used to build composite markups.
+var (
+	aboutButton = gotgbot.InlineKeyboardButton{Text: "About ℹ️", CallbackData: "cmd_ABOUT"}
+	helpButton  = gotgbot.InlineKeyboardButton{Text: "Help ❓", CallbackData: "cmd_HELP"}
+	homeButton  = gotgbot.InlineKeyboardButton{Text: "Home 🏠", CallbackData: "cmd_START"}
+)

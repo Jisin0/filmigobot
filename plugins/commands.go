@@ -33,7 +33,7 @@ This bot does not connect to any datbase and hence does not store any user data 
 )
 
 var (
-	startButtons = append([][]gotgbot.InlineKeyboardButton{{{Text: "About ℹ️", CallbackData: "cmd_ABOUT"}, {Text: "Help ❓", CallbackData: "cmd_HELP"}}}, inlineSearchButtons...)
+	startButtons = append([][]gotgbot.InlineKeyboardButton{{aboutButton, helpButton}}, inlineSearchButtons...)
 )
 
 func Start(bot *gotgbot.Bot, ctx *ext.Context) error {
