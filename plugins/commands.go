@@ -77,7 +77,7 @@ func CbCommand(bot *gotgbot.Bot, ctx *ext.Context) error {
 		buttons, _ = allButtons[cmd]
 	}
 
-	_, _, err := update.Message.EditText(bot, text, &gotgbot.EditMessageTextOpts{ParseMode: gotgbot.ParseModeHTML, ReplyMarkup: gotgbot.InlineKeyboardMarkup{InlineKeyboard: buttons}})
+	_, _, err := update.Message.EditText(bot, text, &gotgbot.EditMessageTextOpts{ParseMode: gotgbot.ParseModeHTML, ReplyMarkup: gotgbot.InlineKeyboardMarkup{InlineKeyboard: buttons}, LinkPreviewOptions: &gotgbot.LinkPreviewOptions{IsDisabled: true}})
 	if err != nil {
 		fmt.Println(err)
 	}
