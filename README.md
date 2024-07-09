@@ -1,13 +1,22 @@
 # filmigobot
 [![telegram badge](https://img.shields.io/badge/Telegram-Channel-30302f?style=flat&logo=telegram)](https://telegram.dog/FractalProjects)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Jisin0/filmigobot)](https://goreportcard.com/report/github.com/Jisin0/filmigobot)
-[![Go Build](https://github.com/Jisin0/filmigobot/workflows/Go/badge.svg)](https://github.com/Jisin0/filmigobot/actions?query=workflow%3AGo+event%3Apush+branch%3Amain)
+[![Go Build](https://github.com/Jisin0/filmigobot/workflows/Build/badge.svg)](https://github.com/Jisin0/filmigobot/actions?query=workflow%3ABuild+event%3Apush+branch%3Amain)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 [**filmigobot** ](https://filmigobot.vercel.app) is a fully serverless high-performace inline telegram bot to search different movie databases using the [filmigo library](https://github.com/Jisin0/filmigo) written in [GO](https://go.dev). It is designed to be easily deployed to Vercel but has support almost any other servers. It currently supports IMDb, JustWatch and OMDb.
 
 Connect a new bot to the [Public App](https://filmigobot.vercel.app) now or deploy a new instance following the instructions below.
 [Sample Bot](https://telegram.dog/SurfOTTBot)
+
+## Commands
+```
+/start : Check if the bot is alive.
+/about: Basic Information About the bot.
+/help: Short Guide on How to Use the Bot.
+/imdb: Search or get a movie from IMDb.
+/jw: Search or get a movie from JustWatch
+```
 
 ## Variables
 

@@ -5,6 +5,7 @@ package plugins
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/PaulSonOfLars/gotgbot/v2"
 	"github.com/PaulSonOfLars/gotgbot/v2/ext"
@@ -26,13 +27,84 @@ This bot is only for limited non-commercial use of <a href='https://help.imdb.co
 </blockquote>
 `
 
-	startButtons = append(inlineSearchButtons, []gotgbot.InlineKeyboardButton{{Text: "Source Code", Url: "github.com/Jisin0/filmigobot"}})
+	PrivacyText = `
+This bot does not connect to any datbase and hence does not store any user data in any form.
+`
+)
+
+var (
+	startButtons = append([][]gotgbot.InlineKeyboardButton{{aboutButton, helpButton}}, inlineSearchButtons...)
 )
 
 func Start(bot *gotgbot.Bot, ctx *ext.Context) error {
 	update := ctx.EffectiveMessage
 
 	_, err := bot.SendMessage(update.Chat.Id, fmt.Sprintf(startText, mention(update.From)), &gotgbot.SendMessageOpts{ParseMode: gotgbot.ParseModeHTML, LinkPreviewOptions: &gotgbot.LinkPreviewOptions{IsDisabled: true}, ReplyMarkup: gotgbot.InlineKeyboardMarkup{InlineKeyboard: startButtons}})
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return ext.EndGroups
+}
+
+// CbCommand handles callback from command buttons.
+func CbCommand(bot *gotgbot.Bot, ctx *ext.Context) error {
+	update := ctx.CallbackQuery
+
+	split := strings.SplitN(update.Data, "_", 2)
+	if len(split) < 2 {
+		update.Answer(bot, &gotgbot.AnswerCallbackQueryOpts{Text: "Bad Callback Data !", ShowAlert: true})
+		return nil
+	}
+
+	var (
+		cmd     = strings.ToUpper(split[1])
+		text    string
+		buttons [][]gotgbot.InlineKeyboardButton
+	)
+
+	switch cmd {
+	case "START":
+		text = fmt.Sprintf(startText, mention(ctx.EffectiveUser))
+		buttons = startButtons
+	default:
+		if s, k := allTexts[cmd]; k {
+			text = s
+		} else {
+			text, _ = allTexts["NOTFOUND"]
+		}
+
+		buttons, _ = allButtons[cmd]
+	}
+
+	_, _, err := update.Message.EditText(bot, text, &gotgbot.EditMessageTextOpts{ParseMode: gotgbot.ParseModeHTML, ReplyMarkup: gotgbot.InlineKeyboardMarkup{InlineKeyboard: buttons}, LinkPreviewOptions: &gotgbot.LinkPreviewOptions{IsDisabled: true}})
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return nil
+}
+
+// CommandHandler handles any command except start.
+func CommandHandler(bot *gotgbot.Bot, ctx *ext.Context) error {
+	update := ctx.EffectiveMessage
+
+	cmd := strings.ToUpper(strings.Split(strings.ToLower(strings.Fields(update.GetText())[0]), "@")[0][1:])
+
+	var text string
+	if s, k := allTexts[cmd]; k {
+		text = s
+	} else {
+		if update.Chat.Type != gotgbot.ChatTypePrivate {
+			return nil
+		}
+
+		text, _ = allTexts["NOTFOUND"]
+	}
+
+	buttons, _ := allButtons[cmd]
+
+	_, err := bot.SendMessage(update.Chat.Id, text, &gotgbot.SendMessageOpts{ParseMode: gotgbot.ParseModeHTML, LinkPreviewOptions: &gotgbot.LinkPreviewOptions{IsDisabled: true}, ReplyMarkup: gotgbot.InlineKeyboardMarkup{InlineKeyboard: buttons}})
 	if err != nil {
 		fmt.Println(err)
 	}

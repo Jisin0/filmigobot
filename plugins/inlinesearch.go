@@ -84,7 +84,7 @@ func InlineQueryHandler(bot *gotgbot.Bot, ctx *ext.Context) error {
 		query = args[1]
 	}
 
-	if contains(allSearchMethods, method) && len(query) < 1 {
+	if Contains(allSearchMethods, method) && len(query) < 1 {
 		_, err := update.Answer(bot, []gotgbot.InlineQueryResult{}, &gotgbot.AnswerInlineQueryOpts{CacheTime: defaultCacheTime, Button: startSearchingButton})
 
 		return err

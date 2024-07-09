@@ -6,10 +6,13 @@ package plugins
 import (
 	"errors"
 	"fmt"
+	"net/url"
+	"regexp"
 	"strings"
 
 	"github.com/Jisin0/filmigo/justwatch"
 	"github.com/PaulSonOfLars/gotgbot/v2"
+	"github.com/PaulSonOfLars/gotgbot/v2/ext"
 )
 
 const (
@@ -156,7 +159,7 @@ func GetJWTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboardB
 		var savedOffers []string
 
 		for _, offer := range title.Offers {
-			if contains(savedOffers, offer.URL) {
+			if Contains(savedOffers, offer.URL) {
 				continue
 			}
 
@@ -223,4 +226,68 @@ func GetJWTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboardB
 	}
 
 	return photo, buttons, nil
+}
+
+// JWCommand handles the /justwatch or /jw command.
+func JWCommand(bot *gotgbot.Bot, ctx *ext.Context) error {
+	update := ctx.EffectiveMessage
+
+	split := strings.SplitN(update.GetText(), " ", 2)
+	if len(split) < 2 {
+		text := "<i>Please provide a search query or movie id along with this command !\nFor Example:</i>\n  <code>/justwatch Inception</code>\n  <code>/justwatch tm92641</code>"
+		update.Reply(bot, text, &gotgbot.SendMessageOpts{ParseMode: gotgbot.ParseModeHTML})
+		return nil
+	}
+
+	input := split[1]
+
+	var (
+		photo   gotgbot.InputMediaPhoto
+		buttons [][]gotgbot.InlineKeyboardButton
+		err     error
+	)
+
+	if id := regexp.MustCompile(`tm\d+`).FindString(input); id != "" {
+		photo, buttons, err = GetJWTitle(id)
+	} else {
+		results, e := jWClient.SearchTitle(input)
+		if e != nil {
+			err = e
+		} else {
+			if len(results.Results) < 1 {
+				err = errors.New("No results found")
+			} else {
+				for _, r := range results.Results {
+					buttons = append(buttons, []gotgbot.InlineKeyboardButton{{Text: fmt.Sprintf("%s (%d)", r.Title, r.OriginalReleaseYear), CallbackData: fmt.Sprintf("open_%s_%s", searchMethodJW, r.ID)}})
+				}
+
+				photo = gotgbot.InputMediaPhoto{
+					Media:     gotgbot.InputFileByURL(jWBanner),
+					Caption:   fmt.Sprintf("<i>👋 Hey <tg-spoiler>%s</tg-spoiler> I've got %d Results for you 👇</i>", mention(ctx.EffectiveUser), len(results.Results)),
+					ParseMode: gotgbot.ParseModeHTML,
+				}
+			}
+		}
+	}
+
+	if err != nil {
+		photo = gotgbot.InputMediaPhoto{
+			Caption:   fmt.Sprintf("<i>I'm Sorry %s I Couldn't find Anything for <code>%s</code> 🤧</i>", mention(ctx.EffectiveUser), input),
+			Media:     gotgbot.InputFileByURL(jWBanner),
+			ParseMode: gotgbot.ParseModeHTML,
+		}
+
+		buttons = [][]gotgbot.InlineKeyboardButton{{{Text: "Search On Google 🔎", Url: fmt.Sprintf("https://google.com/search?q=%s", url.QueryEscape(input))}}}
+	}
+
+	_, err = bot.SendPhoto(ctx.EffectiveChat.Id, photo.Media, &gotgbot.SendPhotoOpts{
+		Caption:     photo.Caption,
+		ParseMode:   photo.ParseMode,
+		ReplyMarkup: gotgbot.InlineKeyboardMarkup{InlineKeyboard: buttons},
+		HasSpoiler:  photo.HasSpoiler})
+	if err != nil {
+		fmt.Printf("jwcommand: %v", err)
+	}
+
+	return ext.EndGroups
 }
