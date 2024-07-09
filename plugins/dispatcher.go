@@ -34,6 +34,7 @@ func init() {
 	Dispatcher.AddHandlerToGroup(handlers.NewCallback(callbackquery.All, CbCommand), 0)
 
 	Dispatcher.AddHandlerToGroup(handlers.NewCommand("start", Start), commandHandlerGroup)
+	Dispatcher.AddHandlerToGroup(handlers.NewCommand("imdb", IMDbCommand), commandHandlerGroup)
 	Dispatcher.AddHandlerToGroup(handlers.NewMessage(allCommand, CommandHandler), commandHandlerGroup)
 }
 
