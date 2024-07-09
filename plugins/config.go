@@ -18,15 +18,15 @@ var allTexts map[string]string = map[string]string{
 <i>Type my <b>username</b> into any chat to start <b>searching</b> for any movie 👉</i>
 
 <i>Here's a list of my available commands:</i>
-  /start : Start the bot.
-  /about : Get some data about the bot.
-  /help  : Display this help message.
-  /privacy: Leran how this bot uses your data.
 
-  /imdb: Search or get a movie from IMDb.
-  /jw: Search or get a movie from Justwatch
+/start : Start the bot.
+/about : Get some data about the bot.
+/help  : Display this help message.
+/privacy: Leran how this bot uses your data.
+/imdb: Search or get a movie from IMDb.
+/jw: Search or get a movie from Justwatch
 
-<i>Use the buttons below to search for a movie here 👇</i>
+<i>Use the <b>buttons</b> below to search for a movie here 👇</i>
 `,
 
 	"NOTFOUND": `
