@@ -11,11 +11,11 @@ Connect a new bot to the [Public App](https://filmigobot.vercel.app) now or depl
 
 ## Commands
 ```
-/start : Check if the bot is alive.
-/about: Basic Information About the bot.
-/help: Short Guide on How to Use the Bot.
-/imdb: Search or get a movie from IMDb.
-/jw: Search or get a movie from JustWatch
+/start - Check if the bot is alive.
+/about - Basic Information About the bot.
+/help - Short Guide on How to Use the Bot.
+/imdb - Search or get a movie from IMDb.
+/jw - Search or get a movie from JustWatch
 ```
 
 ## Variables
