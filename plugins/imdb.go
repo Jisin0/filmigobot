@@ -180,7 +180,7 @@ func IMDbCommand(bot *gotgbot.Bot, ctx *ext.Context) error {
 
 				photo = gotgbot.InputMediaPhoto{
 					Media:     gotgbot.InputFileByURL(imdbBanner),
-					Caption:   fmt.Sprintf("<i>👋 Hey <tg-spoiler>%s</tg-spoiler> I'v got %d Results for you 👇</i>", mention(ctx.EffectiveUser), len(results.Results)),
+					Caption:   fmt.Sprintf("<i>👋 Hey <tg-spoiler>%s</tg-spoiler> I've got %d Results for you 👇</i>", mention(ctx.EffectiveUser), len(results.Results)),
 					ParseMode: gotgbot.ParseModeHTML,
 				}
 			}
@@ -189,7 +189,7 @@ func IMDbCommand(bot *gotgbot.Bot, ctx *ext.Context) error {
 
 	if err != nil {
 		photo = gotgbot.InputMediaPhoto{
-			Caption:   fmt.Sprintf("<i>I'm Sorry %s I Couldn't find Anything for <code>%s</code> 🤧", mention(ctx.EffectiveUser), input),
+			Caption:   fmt.Sprintf("<i>I'm Sorry %s I Couldn't find Anything for <code>%s</code> 🤧</i>", mention(ctx.EffectiveUser), input),
 			Media:     gotgbot.InputFileByURL(imdbBanner),
 			ParseMode: gotgbot.ParseModeHTML,
 		}

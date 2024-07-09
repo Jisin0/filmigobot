@@ -35,6 +35,10 @@ func init() {
 
 	Dispatcher.AddHandlerToGroup(handlers.NewCommand("start", Start), commandHandlerGroup)
 	Dispatcher.AddHandlerToGroup(handlers.NewCommand("imdb", IMDbCommand), commandHandlerGroup)
+	Dispatcher.AddHandlerToGroup(handlers.NewCommand("justwatch", JWCommand), commandHandlerGroup)
+	Dispatcher.AddHandlerToGroup(handlers.NewCommand("jw", JWCommand), commandHandlerGroup)
+
+	// Static Commands.
 	Dispatcher.AddHandlerToGroup(handlers.NewMessage(allCommand, CommandHandler), commandHandlerGroup)
 }
 

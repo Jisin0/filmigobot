@@ -21,7 +21,10 @@ var allTexts map[string]string = map[string]string{
   /start : Start the bot.
   /about : Get some data about the bot.
   /help  : Display this help message.
-  /privacy: Read how this bot uses your data.
+  /privacy: Leran how this bot uses your data.
+
+  /imdb: Search or get a movie from IMDb.
+  /justwatch: Search or get a movie from Justwatch
 
 <i>Use the buttons below to search for a movie here 👇</i>
 `,
