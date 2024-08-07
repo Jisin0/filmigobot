@@ -6,7 +6,7 @@ require (
 	github.com/Jisin0/filmigo v0.2.3
 	github.com/PaulSonOfLars/gotgbot/v2 v2.0.0-rc.28
 	github.com/fogleman/gg v1.3.0
-	golang.org/x/image v0.18.0
+	golang.org/x/image v0.19.0
 )
 
 require (
@@ -18,5 +18,5 @@ require (
 	github.com/machinebox/graphql v0.2.2 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	golang.org/x/net v0.26.0 // indirect
-	golang.org/x/text v0.16.0 // indirect
+	golang.org/x/text v0.17.0 // indirect
 )
