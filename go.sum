@@ -1,7 +1,7 @@
 github.com/Jisin0/filmigo v0.2.3 h1:tXv2m0A3FzKW2wJdXsm+ZQb23VvVDlfHeDnvOiQBLtc=
 github.com/Jisin0/filmigo v0.2.3/go.mod h1:OEaHLEiqfy4GuI9pEGgLZq1P/guMYzx8letKYMHYrCA=
-github.com/PaulSonOfLars/gotgbot/v2 v2.0.0-rc.28 h1:3EidAXUUuDBwaRX5881fmpGGv2WPnW9oHwRMlvdQiwU=
-github.com/PaulSonOfLars/gotgbot/v2 v2.0.0-rc.28/go.mod h1:kL1v4iIjlalwm3gCYGvF4NLa3hs+aKEfRkNJvj4aoDU=
+github.com/PaulSonOfLars/gotgbot/v2 v2.0.0-rc.29 h1:5/K8zgmoKnsegt6h9XvFIJAGxbHVWOEwSpjdjaySf6A=
+github.com/PaulSonOfLars/gotgbot/v2 v2.0.0-rc.29/go.mod h1:kL1v4iIjlalwm3gCYGvF4NLa3hs+aKEfRkNJvj4aoDU=
 github.com/antchfx/htmlquery v1.3.1 h1:wm0LxjLMsZhRHfQKKZscDf2COyH4vDYA3wyH+qZ+Ylc=
 github.com/antchfx/htmlquery v1.3.1/go.mod h1:PTj+f1V2zksPlwNt7uVvZPsxpKNa7mlVliCRxLX6Nx8=
 github.com/antchfx/xpath v1.3.0 h1:nTMlzGAK3IJ0bPpME2urTuFL76o4A96iYvoKFHRXJgc=
