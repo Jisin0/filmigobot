@@ -173,26 +173,30 @@ func GetJWTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboardB
 		captionBuilder.WriteString("<b>No Offers Available</b>")
 	}
 
-	var posterURL = content.Poster.FullURL()
+	posterURL := content.Poster.FullURL()
+	if posterURL == "" {
+		posterURL = jWBanner
+	}
+
+	poster := gotgbot.InputFileByURL(posterURL)
 
 	if len(content.Backdrops) > 0 {
 		if s, ok := jWPosterCache[id]; ok {
 			posterURL = s
 		} else {
 			file := CreateJWPoster(content.FullBackdrops[0].FullURL(), posterURL, id)
-
-			tGraphURL, err := UploadTelegraph(file, "photo")
-			if err == nil {
-				posterURL = tGraphURL
-				jWPosterCache[id] = tGraphURL
-			} else {
-				fmt.Println("failed to upload to telegraph " + err.Error())
+			if file != nil {
+				poster = gotgbot.InputFileByReader(id, file)
 			}
-		}
-	}
 
-	if posterURL == "" {
-		posterURL = jWBanner
+			// tGraphURL, err := UploadTelegraph(file, "photo")
+			// if err == nil {
+			// 	posterURL = tGraphURL
+			// 	jWPosterCache[id] = tGraphURL
+			// } else {
+			// 	fmt.Println("failed to upload to telegraph " + err.Error())
+			// }
+		}
 	}
 
 	if len(content.Clips) > 0 {
@@ -219,7 +223,7 @@ func GetJWTitle(id string) (gotgbot.InputMediaPhoto, [][]gotgbot.InlineKeyboardB
 	}
 
 	photo = gotgbot.InputMediaPhoto{
-		Media:      gotgbot.InputFileByURL(posterURL),
+		Media:      poster,
 		Caption:    captionBuilder.String(),
 		ParseMode:  gotgbot.ParseModeHTML,
 		HasSpoiler: true,
