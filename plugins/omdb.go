@@ -5,7 +5,6 @@ package plugins
 
 import (
 	"fmt"
-	"os"
 	"strings"
 
 	"github.com/Jisin0/filmigo/omdb"
@@ -24,8 +23,8 @@ var (
 )
 
 func init() {
-	if key := os.Getenv("OMDB_API_KEY"); key != notAvailable {
-		omdbClient = omdb.NewClient(key)
+	if OmdbApiKey != "" {
+		omdbClient = omdb.NewClient(OmdbApiKey)
 
 		inlineSearchButtons = append(inlineSearchButtons, []gotgbot.InlineKeyboardButton{{Text: "🔍 Search OMDb", SwitchInlineQueryCurrentChat: &inlineOMDbSwitch}})
 	}
