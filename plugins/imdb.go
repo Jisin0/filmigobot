@@ -42,19 +42,27 @@ func IMDbInlineSearch(query string) []gotgbot.InlineQueryResult {
 		}
 
 		title := fmt.Sprintf("%s (%v)", item.Title, item.Year)
+		url := fmt.Sprintf("https://imdb.com/title/%s", item.ID)
 
-		results = append(results, gotgbot.InlineQueryResultPhoto{
+		r := gotgbot.InlineQueryResultArticle{
 			Id:           searchMethodIMDb + "_" + item.ID,
-			PhotoUrl:     posterURL,
+			Url:          url,
 			ThumbnailUrl: posterURL,
 			Title:        title,
 			Description:  item.Description,
-			Caption:      fmt.Sprintf("<b><a href='https://imdb.com/title/%s'>%s</a></b>", item.ID, title),
-			ParseMode:    gotgbot.ParseModeHTML,
+			InputMessageContent: gotgbot.InputTextMessageContent{
+				MessageText: fmt.Sprintf("<b><a href='%s'>%s</a></b>", url, title),
+				ParseMode:   gotgbot.ParseModeHTML,
+				LinkPreviewOptions: &gotgbot.LinkPreviewOptions{
+					PreferSmallMedia: true,
+				},
+			},
 			ReplyMarkup: &gotgbot.InlineKeyboardMarkup{InlineKeyboard: [][]gotgbot.InlineKeyboardButton{
 				{{Text: "Open IMDb", CallbackData: fmt.Sprintf("open_%s_%s", searchMethodIMDb, item.ID)}},
 			}},
-		})
+		}
+
+		results = append(results, r)
 	}
 
 	return results
