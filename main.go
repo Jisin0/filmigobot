@@ -6,7 +6,6 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"os"
 	"time"
 
 	"github.com/Jisin0/filmigobot/plugins"
@@ -21,8 +20,7 @@ const (
 func main() {
 	// Run a useless http server to get a healthy build on koyeb/render
 	go func() {
-		port := os.Getenv("PORT")
-
+		port := plugins.Port
 		if port == "" {
 			port = "8080"
 		}
@@ -38,7 +36,7 @@ func main() {
 		}
 	}()
 
-	token := os.Getenv("BOT_TOKEN")
+	token := plugins.BotToken
 	if token == "" {
 		panic("exiting because no BOT_TOKEN provided")
 	}

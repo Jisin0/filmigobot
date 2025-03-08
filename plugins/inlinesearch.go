@@ -5,7 +5,6 @@ package plugins
 
 import (
 	"fmt"
-	"os"
 	"strings"
 
 	"github.com/PaulSonOfLars/gotgbot/v2"
@@ -13,8 +12,8 @@ import (
 )
 
 var (
-	defaulSearchMethod = searchMethodJW
-	allSearchMethods   = []string{searchMethodIMDb, searchMethodOMDb, searchMethodJW}
+	defaultSearchMethod = searchMethodJW
+	allSearchMethods    = []string{searchMethodIMDb, searchMethodOMDb, searchMethodJW}
 )
 
 // Search methods with a whitespace added after for a seamless search.
@@ -53,12 +52,12 @@ const (
 )
 
 func init() {
-	if defaultMethod := os.Getenv("DEFAULT_SEARCH_METHOD"); defaultMethod != "" {
-		if defaultMethod == searchMethodIMDb || defaultMethod == searchMethodOMDb || defaulSearchMethod == searchMethodJW {
-			defaulSearchMethod = defaultMethod
-		} else {
-			fmt.Printf("error: unknown search method \"%s\", using default method \"%s\"\n", defaultMethod, defaulSearchMethod)
-		}
+	switch DefaultMethod {
+	case "":
+		DefaultMethod = defaultSearchMethod
+	case searchMethodIMDb, searchMethodJW, searchMethodOMDb:
+	default:
+		fmt.Printf("error: unknown search method \"%s\", using default method \"%s\"\n", DefaultMethod, defaultSearchMethod)
 	}
 }
 
@@ -120,6 +119,6 @@ func getInlineResults(method, query, fullQuery string) []gotgbot.InlineQueryResu
 	case searchMethodOMDb:
 		return OMDbInlineSearch(query)
 	default:
-		return getInlineResults(defaulSearchMethod, fullQuery, fullQuery)
+		return getInlineResults(DefaultMethod, fullQuery, fullQuery)
 	}
 }

@@ -28,12 +28,12 @@ const (
 
 // ImdbInlineSearch searches for query on imdb and returns results to be used in inline queries.
 func IMDbInlineSearch(query string) []gotgbot.InlineQueryResult {
-	var results []gotgbot.InlineQueryResult
-
 	rawResults, err := imdbClient.SearchTitles(query)
 	if err != nil {
-		return results
+		return nil
 	}
+
+	results := make([]gotgbot.InlineQueryResult, 0, len(rawResults.Results))
 
 	for _, item := range rawResults.Results {
 		posterURL := item.Image.URL
@@ -42,15 +42,21 @@ func IMDbInlineSearch(query string) []gotgbot.InlineQueryResult {
 		}
 
 		title := fmt.Sprintf("%s (%v)", item.Title, item.Year)
+		url := fmt.Sprintf("https://imdb.com/title/%s", item.ID)
 
-		results = append(results, gotgbot.InlineQueryResultPhoto{
+		results = append(results, gotgbot.InlineQueryResultArticle{
 			Id:           searchMethodIMDb + "_" + item.ID,
-			PhotoUrl:     posterURL,
+			Url:          url,
 			ThumbnailUrl: posterURL,
 			Title:        title,
 			Description:  item.Description,
-			Caption:      fmt.Sprintf("<b><a href='https://imdb.com/title/%s'>%s</a></b>", item.ID, title),
-			ParseMode:    gotgbot.ParseModeHTML,
+			InputMessageContent: gotgbot.InputTextMessageContent{
+				MessageText: fmt.Sprintf("<b><a href='%s'>%s</a></b>", url, title),
+				ParseMode:   gotgbot.ParseModeHTML,
+				LinkPreviewOptions: &gotgbot.LinkPreviewOptions{
+					PreferSmallMedia: true,
+				},
+			},
 			ReplyMarkup: &gotgbot.InlineKeyboardMarkup{InlineKeyboard: [][]gotgbot.InlineKeyboardButton{
 				{{Text: "Open IMDb", CallbackData: fmt.Sprintf("open_%s_%s", searchMethodIMDb, item.ID)}},
 			}},

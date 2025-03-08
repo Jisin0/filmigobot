@@ -34,12 +34,12 @@ var jWClient = justwatch.NewClient(&justwatch.JustwatchClientOpts{Country: jWCou
 
 // JWInlineSearch searches for query on justwatch and returns results to be used in inline queries.
 func JWInlineSearch(query string) []gotgbot.InlineQueryResult {
-	var results []gotgbot.InlineQueryResult
-
 	rawResults, err := jWClient.SearchTitle(query)
 	if err != nil {
-		return results
+		return nil
 	}
+
+	results := make([]gotgbot.InlineQueryResult, 0, len(rawResults.Results))
 
 	for _, item := range rawResults.Results {
 		posterURL := item.Poster.FullURL()

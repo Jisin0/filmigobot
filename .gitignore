@@ -28,3 +28,6 @@ go.work.sum
 
 # Vscode workspace configs
 /.vscode
+
+# Env file
+.env

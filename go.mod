@@ -6,6 +6,7 @@ require (
 	github.com/Jisin0/filmigo v0.2.3
 	github.com/PaulSonOfLars/gotgbot/v2 v2.0.0-rc.29
 	github.com/fogleman/gg v1.3.0
+	github.com/joho/godotenv v1.5.1
 	golang.org/x/image v0.20.0
 )
 

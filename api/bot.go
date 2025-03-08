@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"os"
 	"path"
 	"strings"
 
@@ -14,7 +13,7 @@ import (
 )
 
 var (
-	allowedTokens    = strings.Split(os.Getenv("BOT_TOKEN"), " ")
+	allowedTokens    = strings.Split(plugins.BotToken, " ")
 	lenAllowedTokens = len(allowedTokens)
 )
 

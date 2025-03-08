@@ -5,7 +5,6 @@ package plugins
 
 import (
 	"fmt"
-	"os"
 	"strings"
 
 	"github.com/Jisin0/filmigo/omdb"
@@ -24,8 +23,8 @@ var (
 )
 
 func init() {
-	if key := os.Getenv("OMDB_API_KEY"); key != notAvailable {
-		omdbClient = omdb.NewClient(key)
+	if OmdbApiKey != "" {
+		omdbClient = omdb.NewClient(OmdbApiKey)
 
 		inlineSearchButtons = append(inlineSearchButtons, []gotgbot.InlineKeyboardButton{{Text: "🔍 Search OMDb", SwitchInlineQueryCurrentChat: &inlineOMDbSwitch}})
 	}
@@ -33,16 +32,16 @@ func init() {
 
 // OmdbInlineSearch searches for query on omdb and returns results to be used in inline queries.
 func OMDbInlineSearch(query string) []gotgbot.InlineQueryResult {
-	var results []gotgbot.InlineQueryResult
-
 	if omdbClient == nil {
-		return results
+		return nil
 	}
 
 	rawResults, err := omdbClient.Search(query)
 	if err != nil {
-		return results
+		return nil
 	}
+
+	results := make([]gotgbot.InlineQueryResult, 0, len(rawResults.Results))
 
 	for _, item := range rawResults.Results {
 		posterURL := item.Poster
